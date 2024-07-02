@@ -22,3 +22,80 @@ input:-webkit-autofill:active {
 .link {
   @apply text-[#3461FD] hover:text-[#073dff] hover:underline duration-200 text-sm;
 }
+
+.card-theme {
+  @apply bg-white border-2 border-slate-400 p-4 rounded-xl;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+    cursor: default;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--x) var(--y), rgba(7, 61, 255, 0.1), transparent);
+    pointer-events: none;
+    transition: opacity 0.3s;
+    opacity: 0;
+    z-index: 0;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+.button-info-plus {
+  @apply duration-200 cursor-pointer;
+}
+
+.button-info-plus:hover {
+  @apply !bg-[#e5ebff] scale-[1.02] shadow-md;
+}
+
+.button-info-plus:active{
+  @apply !bg-[#d5dfff] scale-[1] shadow-none duration-100;
+
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
+
+.scrollbar-hide:hover::-webkit-scrollbar-thumb:vertical {
+  @apply bg-neutral-500;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  @apply h-1.5 w-1.5 rounded-xl bg-transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb:vertical {
+  @apply h-[1px] w-[1px] rounded-xl bg-transparent;
+}
+
+.scrollbar-hide:hover::-webkit-scrollbar-thumb:horizontal {
+  @apply bg-neutral-500;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb:horizontal {
+  @apply h-[1px] w-[1px] rounded-xl bg-transparent;
+}

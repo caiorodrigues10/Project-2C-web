@@ -4,14 +4,14 @@ import { TextInputIcon } from "./TextInputIcon";
 import { TextInputInputProps } from "./type";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
-export const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
+const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
   ({ className, type, ...rest }, ref) => {
     const [typeInput, setTypeInput] = useState(type);
 
     return (
       <>
         <input
-          className="text-md bg-transparent outline-none w-full placeholder:text-zinc-500"
+          className="text-sm bg-transparent outline-none w-full placeholder:text-zinc-500"
           type={type === "password" ? typeInput : type}
           ref={ref}
           {...rest}
@@ -42,3 +42,7 @@ export const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
     );
   }
 );
+
+TextInputInput.displayName = "TextInputInput";
+
+export { TextInputInput };
