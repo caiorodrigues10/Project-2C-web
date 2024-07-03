@@ -1,4 +1,9 @@
-import { InputHTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import {
+  InputHTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+  TextareaHTMLAttributes,
+} from "react";
 
 export interface TextInputInputProps
   extends InputHTMLAttributes<HTMLInputElement> {}
@@ -26,3 +31,6 @@ export interface TextInputContentProps {
 export interface TextInputIconProps extends PropsWithChildren {
   children?: ReactNode;
 }
+
+export interface TextInputTextAreaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {}

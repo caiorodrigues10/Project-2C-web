@@ -3,6 +3,7 @@ import { forwardRef, useState } from "react";
 import { TextInputIcon } from "./TextInputIcon";
 import { TextInputInputProps } from "./type";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import clsx from "clsx";
 
 const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
   ({ className, type, ...rest }, ref) => {
@@ -11,7 +12,10 @@ const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
     return (
       <>
         <input
-          className="text-sm bg-transparent outline-none w-full placeholder:text-zinc-500"
+          className={clsx(
+            "text-sm bg-transparent outline-none w-full placeholder:text-zinc-500",
+            className
+          )}
           type={type === "password" ? typeInput : type}
           ref={ref}
           {...rest}

@@ -99,3 +99,8 @@ input:-webkit-autofill:active {
 .scrollbar-hide::-webkit-scrollbar-thumb:horizontal {
   @apply h-[1px] w-[1px] rounded-xl bg-transparent;
 }
+
+.icon-footer {
+  @apply rounded-full cursor-pointer hover:scale-110 bg-zinc-800 shadow-md flex w-[50px] h-[50px] text-white hover:bg-zinc-700 duration-200 items-center justify-center active:scale-100;
+}
+

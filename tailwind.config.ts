@@ -7,7 +7,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "radial-gradient":
+          "radial-gradient(circle, #4200FF 0%, rgba(66, 0, 255, 0) 70%)",
+      },
+    },
   },
   plugins: [],
 };

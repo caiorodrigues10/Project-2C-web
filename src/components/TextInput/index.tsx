@@ -4,6 +4,7 @@ import { TextInputIcon } from "./TextInputIcon";
 import { TextInputInput } from "./TextInputInput";
 import { TextInputLabel } from "./TextInputLabel";
 import { TextInputRoot } from "./TextInputRoot";
+import { TextInputTextArea } from "./TextInputTextArea";
 
 export const TextInput = {
   Root: TextInputRoot,
@@ -12,4 +13,5 @@ export const TextInput = {
   Icon: TextInputIcon,
   Error: TextInputError,
   Content: TextInputContent,
+  Area: TextInputTextArea,
 };

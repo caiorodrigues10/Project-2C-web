@@ -1,9 +1,19 @@
 "use client";
 import { Card } from "@/components/Card";
-import { Plus } from "lucide-react";
+import {
+  ArrowUpRight,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  Plus,
+} from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { TextInput } from "@/components/TextInput";
+import { Button } from "@/components/Button";
 
 export default function HomePage() {
   const handleMouseMove = (event: any) => {
@@ -16,18 +26,18 @@ export default function HomePage() {
     card.style.setProperty("--y", `${y}px`);
   };
 
-  useEffect(() => {
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
+  // useEffect(() => {
+  //   const cards = document.querySelectorAll(".card");
+  //   cards.forEach((card) => {
+  //     card.addEventListener("mousemove", handleMouseMove);
+  //   });
 
-    return () => {
-      cards.forEach((card) => {
-        card.removeEventListener("mousemove", handleMouseMove);
-      });
-    };
-  }, []);
+  //   return () => {
+  //     cards.forEach((card) => {
+  //       card.removeEventListener("mousemove", handleMouseMove);
+  //     });
+  //   };
+  // }, []);
 
   return (
     <div className="flex flex-col gap-12">
@@ -133,6 +143,111 @@ export default function HomePage() {
           forma de autenticação, consigam utilizar ela de forma gratuita e
           simples!
         </p>
+      </div>
+
+      <div className="flex justify-center w-full flex-col gap-6">
+        <h1 className="text-5xl font-semibold bg-gradient-to-r from-[#24015F] to-black text-transparent bg-clip-text col-span-4 w-full h-full">
+          Contatos
+        </h1>
+        <div className="flex items-center justify-between relative">
+          <div className="flex flex-col gap-8">
+            <div className="flex gap-4 items-center">
+              <div className="flex h-14 w-14 bg-gradient-to-b from-black to-[#4f00d6] text-white justify-center items-center rounded-2xl">
+                <Github size={32} />
+              </div>
+              <div className="group flex items-center">
+                <Link
+                  href={"#"}
+                  className="font-semibold group-hover:hover:underline text-2xl duration-200 hover:text-violet-900"
+                >
+                  Github
+                </Link>
+                <ArrowUpRight className="ml-2 text-transparent group-hover:text-violet-900 duration-200" />
+              </div>
+            </div>
+            <div className="flex gap-4 items-center">
+              <div className="flex h-14 w-14 bg-gradient-to-b from-black to-[#4f00d6] text-white justify-center items-center rounded-2xl">
+                <Linkedin size={32} />
+              </div>
+              <div className="group flex items-center">
+                <Link
+                  href={"#"}
+                  className="font-semibold group-hover:hover:underline text-2xl duration-200 hover:text-violet-900"
+                >
+                  LinkedIn
+                </Link>
+                <ArrowUpRight className="ml-2 text-transparent group-hover:text-violet-900 duration-200" />
+              </div>
+            </div>
+            <div className="flex gap-4 items-center">
+              <div className="flex h-14 w-14 bg-gradient-to-b from-black to-[#4f00d6] text-white justify-center items-center rounded-2xl">
+                <Instagram size={32} />
+              </div>
+              <div className="group flex items-center">
+                <Link
+                  href={"#"}
+                  className="font-semibold group-hover:hover:underline text-2xl duration-200 hover:text-violet-900"
+                >
+                  Instagram
+                </Link>
+                <ArrowUpRight className="ml-2 text-transparent group-hover:text-violet-900 duration-200" />
+              </div>
+            </div>
+            <div className="flex gap-4 items-center">
+              <div className="flex h-14 w-14 bg-gradient-to-b from-black to-[#4f00d6] text-white justify-center items-center rounded-2xl">
+                <Mail size={32} />
+              </div>
+              <div className="group flex items-center">
+                <Link
+                  href={"#"}
+                  className="font-semibold group-hover:hover:underline text-2xl duration-200 hover:text-violet-900"
+                >
+                  E-mail
+                </Link>
+                <ArrowUpRight className="ml-2 text-transparent group-hover:text-violet-900 duration-200" />
+              </div>
+            </div>
+          </div>
+          <Image
+            src="/phone.svg"
+            alt=""
+            width={350}
+            height={100}
+            className="-mr-[30%] mt-16"
+          />
+
+          <Card className="flex flex-col gap-6 !p-8 min-w-[464px]">
+            <h1 className="text-2xl text-center font-semibold">
+              Envie uma mensagem
+            </h1>
+
+            <form className="flex flex-col gap-4">
+              <TextInput.Root>
+                <TextInput.Content>
+                  <TextInput.Input placeholder="Nome" />
+                </TextInput.Content>
+              </TextInput.Root>
+              <TextInput.Root>
+                <TextInput.Content>
+                  <TextInput.Input placeholder="E-mail" />
+                </TextInput.Content>
+              </TextInput.Root>{" "}
+              <TextInput.Root>
+                <TextInput.Content>
+                  <TextInput.Area placeholder="Mensagem" />
+                </TextInput.Content>
+              </TextInput.Root>
+              <Button>Enviar mensagem</Button>
+            </form>
+          </Card>
+          <Image
+            src="/party.svg"
+            alt=""
+            width={150}
+            height={100}
+            className="absolute -z-10 -right-[8%] mt-[30%]"
+          />
+        </div>
       </div>
     </div>
   );
