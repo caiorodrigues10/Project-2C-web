@@ -29,7 +29,7 @@ const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
                 onClick={() => {
                   setTypeInput("password");
                 }}
-                size={24}
+                size={20}
               />
             ) : (
               <IoMdEyeOff
@@ -37,7 +37,7 @@ const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
                 onClick={() => {
                   setTypeInput("text");
                 }}
-                size={24}
+                size={20}
               />
             )}
           </TextInputIcon>

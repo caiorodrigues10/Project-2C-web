@@ -13,7 +13,7 @@ export function Footer({}: {}) {
               <Image
                 src={"/logo-with-project.svg"}
                 alt="Logo Project 2C"
-                width={200}
+                width={180}
                 height={10}
               />
               <p className="text-[#C5C5C5] text-lg">
