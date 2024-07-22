@@ -16,7 +16,12 @@ export function ModalSendEmail() {
         Esqueceu sua senha?
       </button>
 
-      <Modal.Root title="Recuperar senha" isOpen={isOpen} onClose={onClose}>
+      <Modal.Root
+        title="Recuperar senha"
+        isOpen={isOpen}
+        onClose={onClose}
+        className="max-lg:min-w-[400px]"
+      >
         <form>
           <Modal.Body>
             <TextInput.Root>

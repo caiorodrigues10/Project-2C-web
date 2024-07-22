@@ -29,7 +29,6 @@ input:-webkit-autofill:active {
 
 .card {
     position: relative;
-    overflow: hidden;
     transition: transform 0.2s;
     cursor: default;
 }

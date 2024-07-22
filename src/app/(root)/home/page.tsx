@@ -26,36 +26,36 @@ export default function HomePage() {
     card.style.setProperty("--y", `${y}px`);
   };
 
-  // useEffect(() => {
-  //   const cards = document.querySelectorAll(".card");
-  //   cards.forEach((card) => {
-  //     card.addEventListener("mousemove", handleMouseMove);
-  //   });
+  useEffect(() => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
 
-  //   return () => {
-  //     cards.forEach((card) => {
-  //       card.removeEventListener("mousemove", handleMouseMove);
-  //     });
-  //   };
-  // }, []);
+    return () => {
+      cards.forEach((card) => {
+        card.removeEventListener("mousemove", handleMouseMove);
+      });
+    };
+  }, []);
 
   return (
     <div className="flex flex-col gap-12">
       <div className="grid grid-cols-12 gap-4">
-        <Card className="card flex gap-4 p-6 col-span-6 !bg-[#F2F5FF] !border-[#D1DBFF] items-center">
+        <Card className="card flex max-sm:flex-col gap-4 p-6 col-span-6 max-xl:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF] items-center">
           <Image alt="" src="/user-1.svg" width={256} height={200} />
           <div className="flex flex-col gap-2">
-            <h1 className="font-semibold text-2xl text-end">
+            <h1 className="font-semibold text-2xl text-end max-sm:text-center">
               Integre o nosso motor biométrico em seu software!
             </h1>
-            <p className="text-end text-md text-zinc-500">
+            <p className="text-end text-md text-zinc-500 max-sm:text-center">
               Disponibilizamos nosso motor biométrico gratuitamente, para que
               sua empresa possa manter a segurança e evitar fraudes!
             </p>
           </div>
         </Card>
 
-        <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 !bg-[#F2F5FF] !border-[#D1DBFF]">
+        <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 max-xl:col-span-6 max-sm:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF]">
           <Image alt="" src="/1-1.svg" width={70} height={200} />
 
           <h1 className="font-semibold text-xl text-center">
@@ -66,7 +66,7 @@ export default function HomePage() {
           </p>
         </Card>
 
-        <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 !bg-[#F2F5FF] !border-[#D1DBFF]">
+        <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 max-xl:col-span-6 max-sm:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF]">
           <Image alt="" src="/1-n.svg" width={70} height={200} />
           <h1 className="font-semibold text-xl text-center">
             Reconhecimento facial 1:N
@@ -79,25 +79,25 @@ export default function HomePage() {
         <motion.p
           initial={{ x: "-40%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="text-6xl font-semibold bg-gradient-to-r from-[#24015F] to-black text-transparent bg-clip-text p-2 col-span-4 w-full h-full justify-center flex items-center"
+          className="text-6xl max-xl:text-5xl max-lg:text-center max-lg:px-0 max-lg:py-8 max-lg:col-span-12 font-semibold bg-gradient-to-r from-[#24015F] to-black text-transparent bg-clip-text p-2 col-span-4 max-xl:col-span-6 w-full h-full justify-center flex items-center"
         >
           Tecnologias utilizadas em nosso motor biométrico
         </motion.p>
-        <div className="flex flex-col gap-4 col-span-8">
+        <div className="flex flex-col gap-4 col-span-8 max-xl:col-span-6 max-lg:col-span-12">
           <Card className="w-full button-info-plus flex gap-4 items-center justify-between p-6 col-span-3 !bg-[#F2F5FF] !border-[#D1DBFF]">
-            <div className="flex gap-4 items-center">
-              <div className="flex items-center justify-center w-[56px] h-[56px] bg-gradient-to-r from-[#24015F] to-black rounded-xl">
+            <div className="flex gap-4 items-center w-full">
+              <div className="flex items-center justify-center w-[56px] bg-gradient-to-r from-[#24015F] to-black rounded-xl">
                 <Image src={"/rust.svg"} alt="Rust" width={56} height={56} />
               </div>
               <p className="text-lg font-medium">
                 Utilizamos a linguagem de programação Rust
               </p>
             </div>
-            <Plus size={28} />
+            <Plus size={28} className="max-sm:hidden" />
           </Card>
           <Card className="w-full button-info-plus flex gap-4 items-center justify-between p-6 col-span-3 !bg-[#F2F5FF] !border-[#D1DBFF]">
             <div className="flex gap-4 items-center">
-              <div className="flex items-center justify-center w-[56px] h-[56px] p-2 bg-gradient-to-r from-[#24015F] to-black rounded-xl">
+              <div className="flex items-center justify-center w-[56px] p-2 bg-gradient-to-r from-[#24015F] to-black rounded-xl">
                 <Image
                   src={"/terra-form.svg"}
                   alt="Rust"
@@ -109,18 +109,18 @@ export default function HomePage() {
                 Disponibilizamos um Terraform para a integração
               </p>
             </div>
-            <Plus size={28} />
+            <Plus size={28} className="max-sm:hidden" />
           </Card>
           <Card className="w-full button-info-plus flex gap-4 items-center justify-between p-6 col-span-3 !bg-[#F2F5FF] !border-[#D1DBFF]">
             <div className="flex gap-4 items-center">
-              <div className="flex items-center justify-center w-[56px] h-[56px] p-2 bg-gradient-to-r from-[#24015F] to-black rounded-xl">
+              <div className="flex items-center justify-center w-[56px] p-2 bg-gradient-to-r from-[#24015F] to-black rounded-xl">
                 <Image src={"/qdrant.svg"} alt="Rust" width={32} height={32} />
               </div>
               <p className="text-lg font-medium">
                 Banco de dados vetorial para comparação das faces
               </p>
             </div>
-            <Plus size={28} />
+            <Plus size={28} className="max-sm:hidden" />
           </Card>
         </div>
       </div>
@@ -146,10 +146,10 @@ export default function HomePage() {
       </div>
 
       <div className="flex justify-center w-full flex-col gap-6">
-        <h1 className="text-5xl font-semibold bg-gradient-to-r from-[#24015F] to-black text-transparent bg-clip-text col-span-4 w-full h-full">
+        <h1 className="text-5xl max-lg:text-center max-lg:mb-8 font-semibold bg-gradient-to-r from-[#24015F] to-black text-transparent bg-clip-text col-span-4 w-full h-full">
           Contatos
         </h1>
-        <div className="flex items-center justify-between relative">
+        <div className="flex items-center justify-between relative max-md:flex-col max-md:gap-8">
           <div className="flex flex-col gap-8">
             <div className="flex gap-4 items-center">
               <div className="flex h-14 w-14 bg-gradient-to-b from-black to-[#4f00d6] text-white justify-center items-center rounded-2xl">
@@ -213,10 +213,10 @@ export default function HomePage() {
             alt=""
             width={350}
             height={100}
-            className="-mr-[30%] mt-16"
+            className="-mr-[30%] mt-16 max-lg:hidden"
           />
 
-          <Card className="flex flex-col gap-6 !p-8 min-w-[464px]">
+          <Card className="flex flex-col gap-6 !p-8 min-w-[464px] max-md:min-w-full">
             <h1 className="text-2xl text-center font-semibold">
               Envie uma mensagem
             </h1>
@@ -245,7 +245,7 @@ export default function HomePage() {
             alt=""
             width={150}
             height={100}
-            className="absolute -z-10 -right-[8%] mt-[30%]"
+            className="absolute -z-10 -right-[8%] mt-[30%] max-md:hidden"
           />
         </div>
       </div>
