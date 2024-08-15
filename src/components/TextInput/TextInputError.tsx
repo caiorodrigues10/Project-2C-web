@@ -6,7 +6,11 @@ export function TextInputError({
   isInvalid,
 }: TextInputErrorProps) {
   return (
-    <label className={clsx("text-sm text-red-600", { hidden: !isInvalid })}>
+    <label
+      className={clsx("text-sm text-red-600 min-h-4 mt-1", {
+        "opacity-0": !isInvalid,
+      })}
+    >
       {description}
     </label>
   );

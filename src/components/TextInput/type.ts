@@ -14,7 +14,7 @@ export interface TextInputLabelProps {
 }
 
 export interface TextInputErrorProps {
-  description: string;
+  description?: string;
   isInvalid?: boolean;
 }
 
