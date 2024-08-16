@@ -103,3 +103,14 @@ input:-webkit-autofill:active {
   @apply rounded-full cursor-pointer hover:scale-110 bg-zinc-800 shadow-md flex w-[50px] h-[50px] text-white hover:bg-zinc-700 duration-200 items-center justify-center active:scale-100;
 }
 
+.button-error {
+  @apply bg-red-500 text-white hover:bg-red-600 duration-200;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+.button-black-white {
+  @apply bg-white text-black hover:bg-slate-200 duration-200;
+}

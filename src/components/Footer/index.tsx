@@ -2,8 +2,34 @@ import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ClientOnly } from "../ClientOnly";
+import { cookies } from "next/headers";
 
 export function Footer() {
+  const token = cookies().get("2c.token")?.value;
+
+  if (token) {
+    return (
+      <footer className="w-full fixed bottom-0 -z-10">
+        <svg
+          viewBox="0 0 1440 250"
+          className="w-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="url(#gradient)"
+            d="M0,160L30,133.3C60,107,120,53,180,42.7C240,32,300,64,360,101.3C420,139,480,181,540,181.3C600,181,660,139,720,133.3C780,128,840,160,900,192C960,224,1020,256,1080,250.7C1140,245,1200,203,1260,176C1320,149,1380,139,1410,133.3L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"
+          />
+          <defs>
+            <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#005C99" />
+              <stop offset="100%" stopColor="#6100FF" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </footer>
+    );
+  }
+
   return (
     <footer className="flex flex-col w-full mt-32 h-full bg-gradient-to-tr from-[#150031]  to-black pt-16 px-16">
       <div className="flex flex-col w-full items-center">

@@ -38,14 +38,7 @@ export function FormSignIn() {
         return;
       }
 
-      const response = await createUser({
-        confirmPassword: data.confirmPassword,
-        password: data.password,
-        cpf: data.cpf,
-        email: data.email,
-        name: data.name,
-        telephone: removedMask(data.telephone),
-      });
+      const response = await createUser(data);
 
       if (response.result === "success") {
         addToast({
@@ -78,7 +71,7 @@ export function FormSignIn() {
         height={300}
         className="max-lg:block hidden"
       />
-      <div className="flex flex-col gap-4 w-full max-w-[400px]">
+      <div className="flex flex-col gap-2 w-full max-w-[400px]">
         <h1 className="font-semibold text-3xl mb-2 max-lg:mb-0 max-lg:text-center">
           Cadastrar-se
         </h1>
@@ -203,7 +196,7 @@ export function FormSignIn() {
             </Link>
           </CheckBox.Label>
         </CheckBox.Root>
-        <Button>Cadastrar-se</Button>
+        <Button className="mt-4">Cadastrar-se</Button>
       </div>
     </form>
   );

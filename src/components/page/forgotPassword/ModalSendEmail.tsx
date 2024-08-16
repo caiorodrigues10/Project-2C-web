@@ -12,7 +12,7 @@ export function ModalSendEmail() {
 
   return (
     <>
-      <button type="button" className="link -mt-3 w-fit" onClick={onOpen}>
+      <button type="button" className="link w-fit" onClick={onOpen}>
         Esqueceu sua senha?
       </button>
 

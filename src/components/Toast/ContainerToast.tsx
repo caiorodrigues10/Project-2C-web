@@ -9,8 +9,8 @@ export function ToastContainer({ toasts }: { toasts: IToastProps[] }) {
   const { removeToast } = useToast();
 
   return (
-    <AnimatePresence mode="popLayout">
-      <div className="fixed top-0 right-0 mt-4 mr-4 space-y-2 z-[9999]">
+    <ul className="fixed top-0 right-0 mt-4 mr-4 space-y-2 z-[9999]">
+      <AnimatePresence mode="popLayout" initial={false}>
         {toasts.map((toast) => (
           <Toast
             key={toast.id}
@@ -20,7 +20,7 @@ export function ToastContainer({ toasts }: { toasts: IToastProps[] }) {
             onClose={removeToast}
           />
         ))}
-      </div>
-    </AnimatePresence>
+      </AnimatePresence>
+    </ul>
   );
 }
