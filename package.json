@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-icons/all-files": "^4.1.0",
@@ -16,13 +17,16 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.28",
     "imask": "6.6.3",
+    "is-base64": "^1.1.0",
     "lucide-react": "^0.400.0",
     "next": "14.2.4",
     "nookies": "^2.5.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.52.2",
     "react-icons": "^5.2.1",
+    "react-webcam": "^7.2.0",
     "uuid": "^10.0.0",
     "zod": "^3.23.8"
   },
