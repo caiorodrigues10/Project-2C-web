@@ -15,6 +15,7 @@ export interface ProgressBarProps {
   setCurrentStep?: (value: number) => void;
   pointClassName?: string;
   lineClassName?: string;
+  isDisabled?: boolean;
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
@@ -24,6 +25,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   lineClassName,
   pointClassName,
   setCurrentStep,
+  isDisabled,
 }) => {
   return (
     <div
@@ -40,7 +42,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           key={key}
           selected={currentStep >= key + 1}
           onClick={() =>
-            setCurrentStep && key < currentStep && setCurrentStep(key + 1)
+            !isDisabled &&
+            setCurrentStep &&
+            key < currentStep &&
+            setCurrentStep(key + 1)
           }
           className={
             currentStep >= key + 1
@@ -48,9 +53,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               : `${pointClassName}-disable`
           }
         >
-          {currentStep === key + 1 && <BsFillCircleFill />}
+          {currentStep === key + 1 && (
+            <BsFillCircleFill className="text-gray-500" />
+          )}
 
-          {currentStep > key + 1 && <BsCheck />}
+          {currentStep > key + 1 && <BsCheck className="text-white" />}
           {!isMobile && (
             <p className="absolute flex top-[120%] w-[200px] justify-center">
               {point.description}

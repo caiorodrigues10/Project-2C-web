@@ -59,20 +59,19 @@ const DropZone = ({
         });
       }
     },
-    [handlePhotoTaken, oneFileUploaded, addToast]
+    [handlePhotoTaken, oneFileUploaded, addToast, removeToast]
   );
 
-  const { getInputProps, isDragAccept, isDragReject } = useDropzone({
-    onDrop,
-    accept: {
-      "image/*": [],
-    },
-  });
+  const { getInputProps, isDragAccept, isDragReject, getRootProps } =
+    useDropzone({
+      onDrop,
+      accept: {
+        "image/*": [],
+      },
+    });
 
   return (
-    <div
-      className={clsx("flex items-center justify-center w-full", {}, className)}
-    >
+    <div className={clsx("flex items-center justify-center w-full", className)}>
       <label
         htmlFor="dropzone-file"
         className={clsx(
@@ -85,6 +84,7 @@ const DropZone = ({
             "hover:bg-slate-200": !photo && !isDragAccept && !isDragReject,
           }
         )}
+        {...getRootProps()}
       >
         {photo ? (
           <Image
@@ -110,10 +110,10 @@ const DropZone = ({
           </>
         )}
         <input
+          {...getInputProps()}
           id="dropzone-file"
           type="file"
           className="hidden"
-          {...getInputProps()}
         />
       </label>
     </div>

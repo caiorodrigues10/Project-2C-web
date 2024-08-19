@@ -120,11 +120,13 @@ input:-webkit-autofill:active {
 }
 
 .progress-point-active {
-  @apply cursor-pointer bg-green-500 [&>button>svg]:text-green-700;
+  @apply cursor-pointer bg-[#24045f] [&>button>svg]:text-green-700;
 }
+
 .progress-point-disable {
   @apply cursor-not-allowed bg-zinc-300 ;
 }
+
 .progress-line {
-  @apply bg-[#ededee] [&>div]:bg-green-500;
+  @apply bg-[#ededee] [&>div]:bg-[#24045f];
 }

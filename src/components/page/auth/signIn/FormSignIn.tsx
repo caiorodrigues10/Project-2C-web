@@ -56,7 +56,7 @@ export function FormSignIn() {
         });
       }
     },
-    [termsAndConditions]
+    [termsAndConditions, addToast, push, removeToast]
   );
 
   return (

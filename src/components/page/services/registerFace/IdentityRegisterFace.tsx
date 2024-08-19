@@ -1,6 +1,10 @@
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { TextInput } from "@/components/TextInput";
+import {
+  IDataRegisterFace,
+  useRegisterFaceContext,
+} from "@/context/RegisterFaceContext";
 import { cpfMask } from "@/utils/MaskProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -9,28 +13,14 @@ import { useForm } from "react-hook-form";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { z } from "zod";
 
-export interface IdentityData {
-  name: string;
-  document: string;
-  date: string;
-}
-
-interface IdentityProps {
-  identityData: IdentityData;
-  setIdentityData: (data: IdentityData) => void;
-  handleNextStep: () => void;
-}
-
-const Identity: React.FC<IdentityProps> = ({
-  handleNextStep,
-  setIdentityData,
-  identityData,
-}) => {
+export function IdentityRegisterFace() {
+  const { setStep, dataRegisterFace, setDataRegisterFace } =
+    useRegisterFaceContext();
   const { back } = useRouter();
 
   const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
-    document: z.string().min(1, "Documento é obrigatório"),
+    cpf: z.string().min(1, "CPF é obrigatório"),
     date: z.string().min(1, "Data de nascimento é obrigatório"),
   });
 
@@ -39,19 +29,17 @@ const Identity: React.FC<IdentityProps> = ({
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IdentityData>({
+  } = useForm<IDataRegisterFace>({
     resolver: zodResolver(schema),
-    defaultValues: identityData,
+    defaultValues: dataRegisterFace,
   });
 
   const onSubmit = useCallback(
-    (data: IdentityData) => {
-      console.log(data);
-
-      setIdentityData(data);
-      handleNextStep();
+    (data: IDataRegisterFace) => {
+      setDataRegisterFace(data);
+      setStep(2);
     },
-    [handleNextStep, setIdentityData]
+    [setDataRegisterFace, setStep]
   );
 
   return (
@@ -91,17 +79,17 @@ const Identity: React.FC<IdentityProps> = ({
           <TextInput.Content>
             <TextInput.Input
               type="text"
-              {...register("document")}
+              {...register("cpf")}
               placeholder="CPF"
               onChange={(e) => {
-                setValue("document", cpfMask(e.target.value));
+                setValue("cpf", cpfMask(e.target.value));
               }}
             />
           </TextInput.Content>
 
           <TextInput.Error
-            isInvalid={!!errors.document}
-            description={errors.document?.message}
+            isInvalid={!!errors.cpf}
+            description={errors.cpf?.message}
           />
         </TextInput.Root>
         <div className="flex justify-between">
@@ -119,6 +107,4 @@ const Identity: React.FC<IdentityProps> = ({
       </form>
     </Card>
   );
-};
-
-export { Identity };
+}

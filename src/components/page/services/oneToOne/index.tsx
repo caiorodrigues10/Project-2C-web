@@ -1,39 +1,32 @@
 "use client";
 import { Capture, TypeCamProps } from "@/components/Capture";
 import { ProgressBar } from "@/components/ProgressbarTailwind";
-import { FaceSimilarity } from "@/components/ScoreFaces/FaceSimilarity";
-import { useAppContext } from "@/context/AppContext";
+import { useOneToOneContext } from "@/context/OneToOneContext";
 import { isMobile } from "@/utils/isMobile";
 import { useState } from "react";
-import { ChooseWhichFacesCompare } from "./ChooseWhichFacesCompare";
-import { Identity, IdentityData } from "./Identify";
+import { ConfirmDataOneToOne } from "./ConfirmDataOneToOne";
+import { IdentityOneToOne } from "./IdentityOneToOne";
+import { ResultOneToOne } from "./ResultOneToOne";
 
 export function OneToOne() {
-  const [step, setStep] = useState(0);
-  const [data, setData] = useState({} as IdentityData);
-  const { photoFace, setPhotoFace } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
+  const { setStep, step, photoFace, setPhotoFace } = useOneToOneContext();
 
   return (
-    <div className="flex flex-col gap-12 justify-center items-center w-full">
+    <>
       <ProgressBar
         currentStep={step}
         points={[
           { description: "Cadastro de dados" },
           { description: "Captura de face" },
+          { description: "Confirmação dos dados" },
           { description: "Resultado" },
         ]}
+        setCurrentStep={setStep}
         isMobile={isMobile()}
+        isDisabled={step === 4}
       />
-      {step === 0 && <ChooseWhichFacesCompare />}
-
-      {step === 1 && (
-        <Identity
-          handleNextStep={() => setStep(2)}
-          identityData={data}
-          setIdentityData={setData}
-        />
-      )}
+      {step === 1 && <IdentityOneToOne />}
       {step === 2 && (
         <Capture
           options={[TypeCamProps.upload, TypeCamProps.cam]}
@@ -44,7 +37,8 @@ export function OneToOne() {
           isLoading={isLoading}
         />
       )}
-      {step === 3 && <FaceSimilarity photo={photoFace} />}
-    </div>
+      {step === 3 && <ConfirmDataOneToOne />}
+      {step === 4 && <ResultOneToOne photo={photoFace} />}
+    </>
   );
 }

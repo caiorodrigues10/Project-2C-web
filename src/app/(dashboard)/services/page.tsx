@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ServicesPage() {
   return (
@@ -21,9 +22,11 @@ export default function ServicesPage() {
             <h5 className="text-xl text-center">
               Cadastrar face na base de dados para simular processos reais
             </h5>
-            <Button variant="black-white" className="w-full">
-              Cadastrar
-            </Button>
+            <Link href={"/services/registerFace"} className="w-full">
+              <Button variant="black-white" className="w-full">
+                Cadastrar
+              </Button>
+            </Link>
           </div>
           <div className="flex flex-col items-center col-span-1 justify-between gap-6 p-4 rounded-3xl bg-gradient-to-t from-[#630FEF] to-[#340483] text-white">
             <Image width={200} height={300} alt="" src={"/face.svg"} />
@@ -34,9 +37,11 @@ export default function ServicesPage() {
             <h5 className="text-xl text-center">
               Porcentagem de similaridade das faces comparadas
             </h5>
-            <Button variant="black-white" className="w-full">
-              Utilizar 1:1
-            </Button>
+            <Link href={"/services/oneToOne"} className="w-full">
+              <Button variant="black-white" className="w-full">
+                Utilizar 1:1
+              </Button>
+            </Link>
           </div>
           <div className="flex flex-col items-center col-span-1  justify-between gap-6 p-4 rounded-3xl bg-gradient-to-t from-[#630FEF] to-[#340483] text-white">
             <Image width={200} height={300} alt="" src={"/face.svg"} />

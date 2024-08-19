@@ -1,24 +1,23 @@
-import Image from "next/image";
-import { Card } from "../Card";
-import clsx from "clsx";
-import { Button } from "../Button";
+import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
 import { Check } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
-export function FaceSimilarity({ photo }: { photo: string }) {
+export function ResultOneToOne({ photo }: { photo: string }) {
   return (
     <Card className="!px-12">
       <h1 className="text-center pb-4 text-3xl font-bold">Resultado</h1>
       <div className="flex justify-betweens gap-4 w-full">
         <Card className="flex flex-col gap-4 justify-center">
           <h1 className="text-center text-2xl font-semibold">Face Capturada</h1>
-          <div className={"flex w-[300px] h-[300px]"}>
+          <div className="flex flex-col items-center justify-center w-full max-w-[300px] h-[300px] rounded border">
             <Image
               src={photo}
-              height={500}
-              width={200}
-              alt="Face"
-              className="rounded-2xl w-auto h-auto max-h-full"
+              alt="Sua Foto"
+              width={300}
+              height={100}
+              className="w-auto h-auto max-h-full rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2 w-full">
@@ -41,14 +40,14 @@ export function FaceSimilarity({ photo }: { photo: string }) {
           <h3 className="text-2xl">de similaridade</h3>
         </div>
         <Card className="flex flex-col gap-4 justify-center">
-          <h1 className="text-center text-2xl font-semibold">Face Capturada</h1>
-          <div className={"flex w-[300px] h-[300px]"}>
+          <h1 className="text-center text-2xl font-semibold">Face Comparada</h1>
+          <div className="flex flex-col items-center justify-center w-full max-w-[300px] h-[300px] rounded border">
             <Image
               src={photo}
-              height={500}
-              width={200}
-              alt="Face"
-              className="rounded-2xl w-auto h-auto max-h-full"
+              alt="Sua Foto"
+              width={300}
+              height={100}
+              className="w-auto h-auto max-h-full rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2 w-full">

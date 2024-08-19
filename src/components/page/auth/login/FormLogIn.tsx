@@ -27,32 +27,35 @@ export default function FormLogIn() {
   const { push } = useRouter();
   const { setCookies } = nookiesProvider();
 
-  const onSubmit = useCallback(async (data: FormLoginProps) => {
-    const response = await login(data);
+  const onSubmit = useCallback(
+    async (data: FormLoginProps) => {
+      const response = await login(data);
 
-    if (response.result === "success") {
-      addToast({
-        type: "success",
-        message: response.message,
-        onClose: removeToast,
-      });
+      if (response.result === "success") {
+        addToast({
+          type: "success",
+          message: response.message,
+          onClose: removeToast,
+        });
 
-      setCookies({
-        userCookies: {
-          token: response.data?.token,
-          email: response.data?.user.email,
-          name: response.data?.user.name,
-        },
-      });
-      push("/services");
-    } else {
-      addToast({
-        type: "error",
-        message: response.message,
-        onClose: removeToast,
-      });
-    }
-  }, []);
+        setCookies({
+          userCookies: {
+            token: response.data?.token,
+            email: response.data?.user.email,
+            name: response.data?.user.name,
+          },
+        });
+        push("/services");
+      } else {
+        addToast({
+          type: "error",
+          message: response.message,
+          onClose: removeToast,
+        });
+      }
+    },
+    [addToast, push, removeToast, setCookies]
+  );
 
   return (
     <form
