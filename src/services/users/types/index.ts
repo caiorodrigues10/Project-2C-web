@@ -36,6 +36,11 @@ interface IUpdateUserResponse extends AppResponse {
   data?: IUser;
 }
 
+interface IChangeUserPassword {
+  password: string;
+  confirmPassword: string;
+}
+
 export type {
   IUser,
   ICreateUser,
@@ -43,4 +48,5 @@ export type {
   IUpdateUser,
   ICreateUserResponse,
   IUpdateUserResponse,
+  IChangeUserPassword,
 };

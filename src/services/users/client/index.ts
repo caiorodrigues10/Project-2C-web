@@ -1,5 +1,6 @@
 import { PROVIDERS } from "@/providers";
 import {
+  IChangeUserPassword,
   ICreateUser,
   ICreateUserResponse,
   IUpdateUser,
@@ -22,12 +23,10 @@ export async function updateUser(
     },
     body: JSON.stringify({ ...data, id: undefined }),
   })
-    .then((res) => res)
+    .then((res) => res.json())
     .catch((err) => err.response);
 
-  const user = await response.json();
-
-  return user;
+  return response;
 }
 
 export async function createUser(
@@ -43,11 +42,11 @@ export async function createUser(
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
-  });
+  })
+    .then((res) => res.json())
+    .catch((err) => err.response);
 
-  const createUser = await response.json();
-
-  return createUser;
+  return response;
 }
 
 export async function inactiveUser(id: number): Promise<AppResponse> {
@@ -59,54 +58,48 @@ export async function inactiveUser(id: number): Promise<AppResponse> {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
+  })
+    .then((res) => res.json())
+    .catch((err) => err.response);
 
-  const inactiveUser = await response.json();
-
-  return inactiveUser;
+  return response;
 }
 
-// export async function reactiveUser(
-//   data: IReactiveUser,
-//   id: number
-// ): Promise<IUserCreateAndEditResponse> {
-//   const { getCookies } = PROVIDERS.cookies();
-//   const { token } = getCookies();
-//   const response = await fetch(`${api}/v1/dashboard/users/${id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify({ ...data, id: undefined }),
-//   })
-//     .then((res) => res)
-//     .catch((err) => err.response);
+export async function recoveryPassword(data: {
+  email: string;
+}): Promise<AppResponse> {
+  const { getCookies } = PROVIDERS.cookies();
+  const { token } = getCookies();
+  const response = await fetch(`${api}/users/forgotPassword`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .catch((err) => err.response);
 
-//   const user = await response.json();
+  return response;
+}
 
-//   return user;
-// }
+export async function changePassword(
+  data: IChangeUserPassword,
+  token: string
+): Promise<AppResponse> {
+  const response = await fetch(
+    `${api}/users/forgotPassword/changePassword?token=${token}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  )
+    .then((res) => res.json())
+    .catch((err) => err.response);
 
-// export async function updatePassword(
-//   data: IUpdatePassword
-// ): Promise<IUpdatePasswordResponse> {
-//   const { getCookies } = PROVIDERS.cookies();
-//   const { token } = getCookies();
-
-//   const update = await fetch(
-//     `${process.env.NEXT_PUBLIC_URL_API}/v1/dashboard/users/password/${data.token}`,
-//     {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({ password: data.password }),
-//     }
-//   )
-//     .then((res) => res.json())
-//     .catch((err) => err.response);
-
-//   return update;
-// }
+  return response;
+}

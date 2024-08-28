@@ -58,10 +58,7 @@ export default function FormLogIn() {
   );
 
   return (
-    <form
-      className="flex justify-center items-center w-full flex-col gap-6"
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <div className="flex justify-center items-center w-full flex-col gap-6">
       <Image
         src={"/logo-with-bg.svg"}
         alt="Logo Project 2C"
@@ -76,40 +73,44 @@ export default function FormLogIn() {
         <p className="text-[#61677D] max-lg:block hidden text-center mb-2">
           Bem-vindo! Comece sua jornada agora com nosso motor biométrico!
         </p>
-        <TextInput.Root>
-          <TextInput.Content>
-            <TextInput.Icon>
-              <Mail size={16} />
-            </TextInput.Icon>
-            <TextInput.Input
-              placeholder="E-mail"
-              type={"email"}
-              {...register("email")}
+        <form
+          className="flex w-full flex-col"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <TextInput.Root>
+            <TextInput.Content>
+              <TextInput.Icon>
+                <Mail size={16} />
+              </TextInput.Icon>
+              <TextInput.Input
+                placeholder="E-mail"
+                type={"email"}
+                {...register("email")}
+              />
+            </TextInput.Content>
+            <TextInput.Error
+              isInvalid={!!errors.email?.message}
+              description={errors.email?.message}
             />
-          </TextInput.Content>
-          <TextInput.Error
-            isInvalid={!!errors.email?.message}
-            description={errors.email?.message}
-          />
-        </TextInput.Root>
-        <TextInput.Root>
-          <TextInput.Content>
-            <TextInput.Icon>
-              <LockKeyhole size={16} />
-            </TextInput.Icon>
-            <TextInput.Input
-              type="password"
-              placeholder="Senha"
-              {...register("password")}
+          </TextInput.Root>
+          <TextInput.Root>
+            <TextInput.Content>
+              <TextInput.Icon>
+                <LockKeyhole size={16} />
+              </TextInput.Icon>
+              <TextInput.Input
+                type="password"
+                placeholder="Senha"
+                {...register("password")}
+              />
+            </TextInput.Content>
+            <TextInput.Error
+              isInvalid={!!errors.password?.message}
+              description={errors.password?.message}
             />
-          </TextInput.Content>
-          <TextInput.Error
-            isInvalid={!!errors.password?.message}
-            description={errors.password?.message}
-          />
-        </TextInput.Root>
-        <Button>Entrar</Button>
-
+          </TextInput.Root>
+          <Button type="submit">Entrar</Button>
+        </form>
         <ClientOnly
           fallback={
             <div className="h-4 w-40 rounded-md -mt-2 animate-pulse bg-slate-300" />
@@ -120,6 +121,6 @@ export default function FormLogIn() {
           </TimerProvider>
         </ClientOnly>
       </div>
-    </form>
+    </div>
   );
 }

@@ -1,5 +1,9 @@
-"use client";
+import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { ClientOnly } from "@/components/ClientOnly";
+import { CardsWelcome } from "@/components/page/home/CardsWelcome";
+import { TextTech } from "@/components/page/home/TextTech";
+import { TextInput } from "@/components/TextInput";
 import {
   ArrowUpRight,
   Github,
@@ -8,81 +12,68 @@ import {
   Mail,
   Plus,
 } from "lucide-react";
+import { cookies } from "next/headers";
 import Image from "next/image";
-import { useEffect } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { TextInput } from "@/components/TextInput";
-import { Button } from "@/components/Button";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
-  const handleMouseMove = (event: any) => {
-    const card = event.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+  const token = cookies().get("2c.token");
 
-    card.style.setProperty("--x", `${x}px`);
-    card.style.setProperty("--y", `${y}px`);
-  };
-
-  useEffect(() => {
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
-
-    return () => {
-      cards.forEach((card) => {
-        card.removeEventListener("mousemove", handleMouseMove);
-      });
-    };
-  }, []);
+  if (token) {
+    redirect("/services");
+  }
 
   return (
     <div className="flex flex-col gap-12">
       <div className="grid grid-cols-12 gap-4">
-        <Card className="card flex max-sm:flex-col gap-4 p-6 col-span-6 max-xl:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF] items-center">
-          <Image alt="" src="/user-1.svg" width={256} height={200} />
-          <div className="flex flex-col gap-2">
-            <h1 className="font-semibold text-2xl text-end max-sm:text-center">
-              Integre o nosso motor biométrico em seu software!
-            </h1>
-            <p className="text-end text-md text-zinc-500 max-sm:text-center">
-              Disponibilizamos nosso motor biométrico gratuitamente, para que
-              sua empresa possa manter a segurança e evitar fraudes!
-            </p>
-          </div>
-        </Card>
+        <ClientOnly
+          fallback={
+            <>
+              <Card className="card flex max-sm:flex-col gap-4 p-6 col-span-6 max-xl:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF] items-center">
+                <Image alt="" src="/user-1.svg" width={256} height={200} />
+                <div className="flex flex-col gap-2">
+                  <h1 className="font-semibold text-2xl text-end max-sm:text-center">
+                    Integre o nosso motor biométrico em seu software!
+                  </h1>
+                  <p className="text-end text-md text-zinc-500 max-sm:text-center">
+                    Disponibilizamos nosso motor biométrico gratuitamente, para
+                    que sua empresa possa manter a segurança e evitar fraudes!
+                  </p>
+                </div>
+              </Card>
 
-        <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 max-xl:col-span-6 max-sm:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF]">
-          <Image alt="" src="/1-1.svg" width={70} height={200} />
+              <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 max-xl:col-span-6 max-sm:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF]">
+                <Image alt="" src="/1-1.svg" width={70} height={200} />
 
-          <h1 className="font-semibold text-xl text-center">
-            Reconhecimento facial 1:1
-          </h1>
-          <p className="text-md text-zinc-500 text-center">
-            Porcentagem de similaridade das faces comparadas
-          </p>
-        </Card>
+                <h1 className="font-semibold text-xl text-center">
+                  Reconhecimento facial 1:1
+                </h1>
+                <p className="text-md text-zinc-500 text-center">
+                  Porcentagem de similaridade das faces comparadas
+                </p>
+              </Card>
 
-        <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 max-xl:col-span-6 max-sm:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF]">
-          <Image alt="" src="/1-n.svg" width={70} height={200} />
-          <h1 className="font-semibold text-xl text-center">
-            Reconhecimento facial 1:N
-          </h1>
-          <p className="text-md text-zinc-500 text-center">
-            Comparar uma face com várias e retorna todas as similares
-          </p>
-        </Card>
-
-        <motion.p
-          initial={{ x: "-40%", opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          className="text-6xl max-xl:text-5xl max-lg:text-center max-lg:px-0 max-lg:py-8 max-lg:col-span-12 font-semibold bg-gradient-to-r from-[#24015F] to-black text-transparent bg-clip-text p-2 col-span-4 max-xl:col-span-6 w-full h-full justify-center flex items-center"
+              <Card className="card flex flex-col gap-4 items-center justify-center p-6 col-span-3 max-xl:col-span-6 max-sm:col-span-12 !bg-[#F2F5FF] !border-[#D1DBFF]">
+                <Image alt="" src="/1-n.svg" width={70} height={200} />
+                <h1 className="font-semibold text-xl text-center">
+                  Reconhecimento facial 1:N
+                </h1>
+                <p className="text-md text-zinc-500 text-center">
+                  Comparar uma face com várias e retorna todas as similares
+                </p>
+              </Card>
+            </>
+          }
         >
-          Tecnologias utilizadas em nosso motor biométrico
-        </motion.p>
+          <CardsWelcome />
+        </ClientOnly>
+        <ClientOnly
+          fallback={<div className="h-full col-span-4 max-xl:col-span-6" />}
+        >
+          <TextTech />
+        </ClientOnly>
+
         <div className="flex flex-col gap-4 col-span-8 max-xl:col-span-6 max-lg:col-span-12">
           <Card className="w-full button-info-plus flex gap-4 items-center justify-between p-6 col-span-3 !bg-[#F2F5FF] !border-[#D1DBFF]">
             <div className="flex gap-4 items-center w-full">
