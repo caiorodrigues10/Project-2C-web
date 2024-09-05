@@ -1,6 +1,6 @@
 import { ClientOnly } from "@/components/ClientOnly";
 import Continue from "@/components/page/auth/login/Continue";
-import FormLogIn from "@/components/page/auth/login/FormLogIn";
+import {FormLogIn} from "@/components/page/auth/login/FormLogIn";
 import { cookies } from "next/headers";
 import Link from "next/link";
 

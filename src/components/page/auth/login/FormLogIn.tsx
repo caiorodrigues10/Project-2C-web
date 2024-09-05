@@ -9,13 +9,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LockKeyhole, Mail } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalSendEmail } from "../../forgotPassword/ModalSendEmail";
 import { FormLoginProps, schemaLogin } from "./types";
 import { nookiesProvider } from "@/providers/cookiesProviders";
 
-export default function FormLogIn() {
+export function FormLogIn() {
   const {
     register,
     handleSubmit,
@@ -26,9 +26,11 @@ export default function FormLogIn() {
   const { addToast, removeToast } = useToast();
   const { push } = useRouter();
   const { setCookies } = nookiesProvider();
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = useCallback(
     async (data: FormLoginProps) => {
+      setIsLoading(true)
       const response = await login(data);
 
       if (response.result === "success") {
@@ -53,6 +55,7 @@ export default function FormLogIn() {
           onClose: removeToast,
         });
       }
+      setIsLoading(false)
     },
     [addToast, push, removeToast, setCookies]
   );
@@ -109,7 +112,7 @@ export default function FormLogIn() {
               description={errors.password?.message}
             />
           </TextInput.Root>
-          <Button type="submit">Entrar</Button>
+          <Button type="submit" isLoading={isLoading}>Entrar</Button>
         </form>
         <ClientOnly
           fallback={

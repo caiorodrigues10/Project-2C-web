@@ -26,9 +26,11 @@ export function FormSignIn() {
   const { addToast, removeToast } = useToast();
   const { push } = useRouter();
   const [termsAndConditions, setTermsAndConditions] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = useCallback(
     async (data: FormSignInProps) => {
+      
       if (!termsAndConditions) {
         addToast({
           type: "error",
@@ -37,7 +39,7 @@ export function FormSignIn() {
         });
         return;
       }
-
+      setIsLoading(true)
       const response = await createUser(data);
 
       if (response.result === "success") {
@@ -55,6 +57,7 @@ export function FormSignIn() {
           onClose: removeToast,
         });
       }
+      setIsLoading(false)
     },
     [termsAndConditions, addToast, push, removeToast]
   );
@@ -196,7 +199,7 @@ export function FormSignIn() {
             </Link>
           </CheckBox.Label>
         </CheckBox.Root>
-        <Button className="mt-4">Cadastrar-se</Button>
+        <Button className="mt-4" type="submit" isLoading={isLoading}>Cadastrar-se</Button>
       </div>
     </form>
   );
