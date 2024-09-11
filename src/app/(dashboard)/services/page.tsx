@@ -14,7 +14,13 @@ export default function ServicesPage() {
         </div>
         <div className="grid grid-cols-3 gap-6">
           <div className="flex flex-col col-span-1 items-center justify-between gap-6 p-4 rounded-3xl bg-gradient-to-t from-[#630FEF] to-[#340483] text-white">
-            <Image width={200} height={300} alt="" src={"/face.svg"} />
+            <Image
+              width={100}
+              height={100}
+              alt=""
+              src={"/registerFace.svg"}
+              className="mt-12"
+            />
             <h2 className="text-2xl font-semibold text-center">
               Cadastro de faces
             </h2>
@@ -29,7 +35,13 @@ export default function ServicesPage() {
             </Link>
           </div>
           <div className="flex flex-col items-center col-span-1 justify-between gap-6 p-4 rounded-3xl bg-gradient-to-t from-[#630FEF] to-[#340483] text-white">
-            <Image width={200} height={300} alt="" src={"/face.svg"} />
+            <Image
+              width={200}
+              height={300}
+              alt=""
+              src={"/oneToOne.svg"}
+              className="mt-12"
+            />
             <h2 className="text-2xl font-semibold text-center">
               1:1 Comparação de duas faces
             </h2>
@@ -44,7 +56,13 @@ export default function ServicesPage() {
             </Link>
           </div>
           <div className="flex flex-col items-center col-span-1  justify-between gap-6 p-4 rounded-3xl bg-gradient-to-t from-[#630FEF] to-[#340483] text-white">
-            <Image width={200} height={300} alt="" src={"/face.svg"} />
+            <Image
+              width={200}
+              height={300}
+              alt=""
+              src={"/oneToMany.svg"}
+              className=""
+            />
             <h2 className="text-2xl font-semibold text-center">
               1:N Comparação de uma face com várias faces faces
             </h2>

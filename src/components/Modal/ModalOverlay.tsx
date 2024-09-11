@@ -17,7 +17,7 @@ export function ModalOverlay({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={clsx(
-            "flex fixed w-full h-full top-0 left-0 justify-center items-center duration-200"
+            "flex fixed w-full h-full top-0 left-0 justify-center items-center duration-200 z-20"
           )}
         >
           <button
@@ -33,7 +33,7 @@ export function ModalOverlay({
             initial={{ scale: 0.5 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
-            className="z-50"
+            className="z-[9999]"
           >
             {children}
           </motion.div>

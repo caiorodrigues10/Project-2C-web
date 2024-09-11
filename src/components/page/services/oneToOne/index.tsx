@@ -2,22 +2,21 @@
 import { Capture, TypeCamProps } from "@/components/Capture";
 import { ProgressBar } from "@/components/ProgressbarTailwind";
 import { useOneToOneContext } from "@/context/OneToOneContext";
+import { IFaces } from "@/services/faces/types";
 import { isMobile } from "@/utils/isMobile";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ConfirmDataOneToOne } from "./ConfirmDataOneToOne";
-import { IdentityOneToOne } from "./IdentityOneToOne";
 import { ResultOneToOne } from "./ResultOneToOne";
 
-export function OneToOne() {
-  const [isLoading, setIsLoading] = useState(false);
+export function OneToOne({ faceData }: { faceData: IFaces }) {
   const { setStep, step, photoFace, setPhotoFace } = useOneToOneContext();
+  const { push } = useRouter();
 
   return (
     <>
       <ProgressBar
         currentStep={step}
         points={[
-          { description: "Cadastro de dados" },
           { description: "Captura de face" },
           { description: "Confirmação dos dados" },
           { description: "Resultado" },
@@ -26,19 +25,17 @@ export function OneToOne() {
         isMobile={isMobile()}
         isDisabled={step === 4}
       />
-      {step === 1 && <IdentityOneToOne />}
-      {step === 2 && (
+      {step === 1 && (
         <Capture
           options={[TypeCamProps.upload, TypeCamProps.cam]}
-          goBack={() => setStep(1)}
-          handleNextStep={() => setStep(3)}
+          goBack={() => push("/services/oneToOne")}
+          handleNextStep={() => setStep(2)}
           setPhoto={setPhotoFace}
           photo={photoFace}
-          isLoading={isLoading}
         />
       )}
-      {step === 3 && <ConfirmDataOneToOne />}
-      {step === 4 && <ResultOneToOne photo={photoFace} />}
+      {step === 2 && <ConfirmDataOneToOne faceData={faceData} />}
+      {step === 3 && <ResultOneToOne photo={photoFace} faceData={faceData} />}
     </>
   );
 }

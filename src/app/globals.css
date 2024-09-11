@@ -130,3 +130,40 @@ input:-webkit-autofill:active {
 .progress-line {
   @apply bg-[#ededee] [&>div]:bg-[#24045f];
 }
+
+.table-theme {
+  @apply border-2 border-neutral-500 bg-neutral-200 ;
+}
+
+.table-text-theme {
+  @apply truncate text-zinc-800;
+}
+
+.table-theme-without-border {
+  @apply bg-neutral-100 font-semibold;
+}
+
+.table-hover {
+  @apply hover:bg-zinc-300;
+}
+
+
+.table-row {
+  @apply  cursor-pointer border-b-[1px] border-slate-300 last:border-none hover:duration-200 hover:bg-slate-200;
+}
+
+.scrollbar-show-fixed {
+  -ms-overflow-style: none;
+}
+
+.scrollbar-show-fixed::-webkit-scrollbar {
+  @apply w-1.5 h-1.5 bg-transparent rounded-xl;
+}
+
+.scrollbar-show-fixed::-webkit-scrollbar-thumb:vertical {
+  @apply bg-zinc-400 h-[1px] w-[1px] rounded-xl
+}
+
+.scrollbar-show-fixed::-webkit-scrollbar-thumb:horizontal {
+  @apply bg-zinc-400 h-[1px] w-[1px] rounded-xl;
+}

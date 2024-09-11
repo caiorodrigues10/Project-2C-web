@@ -2,7 +2,6 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 export interface IDataRegisterFace {
   cpf: string;
-  date: string;
   name: string;
 }
 

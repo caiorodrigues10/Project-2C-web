@@ -4,7 +4,7 @@ import { CheckBox } from "@/components/CheckBox";
 import { TextInput } from "@/components/TextInput";
 import { useToast } from "@/context/ToastContext";
 import { createUser } from "@/services/users/client";
-import { cpfMask, phoneMask, removedMask } from "@/utils/MaskProvider";
+import { cpfMask, phoneMask } from "@/utils/MaskProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LockKeyhole, Mail, User } from "lucide-react";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { BsTelephone } from "react-icons/bs";
 import { FormSignInProps, schemaCreateUser } from "./types";
 
 export function FormSignIn() {
@@ -26,11 +27,10 @@ export function FormSignIn() {
   const { addToast, removeToast } = useToast();
   const { push } = useRouter();
   const [termsAndConditions, setTermsAndConditions] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(
     async (data: FormSignInProps) => {
-      
       if (!termsAndConditions) {
         addToast({
           type: "error",
@@ -39,13 +39,13 @@ export function FormSignIn() {
         });
         return;
       }
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await createUser(data);
 
-      if (response.result === "success") {
+      if (response?.result === "success") {
         addToast({
           type: "success",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
 
@@ -53,11 +53,11 @@ export function FormSignIn() {
       } else {
         addToast({
           type: "error",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
       }
-      setIsLoading(false)
+      setIsLoading(false);
     },
     [termsAndConditions, addToast, push, removeToast]
   );
@@ -135,7 +135,7 @@ export function FormSignIn() {
         <TextInput.Root>
           <TextInput.Content>
             <TextInput.Icon>
-              <Mail size={16} />
+              <BsTelephone size={16} />
             </TextInput.Icon>
             <TextInput.Input
               {...register("telephone")}
@@ -199,7 +199,9 @@ export function FormSignIn() {
             </Link>
           </CheckBox.Label>
         </CheckBox.Root>
-        <Button className="mt-4" type="submit" isLoading={isLoading}>Cadastrar-se</Button>
+        <Button className="mt-4" type="submit" isLoading={isLoading}>
+          Cadastrar-se
+        </Button>
       </div>
     </form>
   );

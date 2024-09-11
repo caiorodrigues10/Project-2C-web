@@ -6,6 +6,7 @@ import {
   useRegisterFaceContext,
 } from "@/context/RegisterFaceContext";
 import { cpfMask } from "@/utils/MaskProvider";
+import { isValidCPF } from "@brazilian-utils/brazilian-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -20,8 +21,12 @@ export function IdentityRegisterFace() {
 
   const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
-    cpf: z.string().min(1, "CPF é obrigatório"),
-    date: z.string().min(1, "Data de nascimento é obrigatório"),
+    cpf: z
+      .string()
+      .min(1, "CPF é obrigatório")
+      .refine((value) => isValidCPF(value), {
+        message: "CPF inválido",
+      }),
   });
 
   const {
@@ -61,20 +66,6 @@ export function IdentityRegisterFace() {
           />
         </TextInput.Root>
 
-        <TextInput.Root>
-          <TextInput.Content>
-            <TextInput.Input
-              type="date"
-              {...register("date")}
-              placeholder="Data de nascimento"
-              maxLength={14}
-            />
-          </TextInput.Content>
-          <TextInput.Error
-            isInvalid={!!errors.date}
-            description={errors.date?.message}
-          />
-        </TextInput.Root>
         <TextInput.Root>
           <TextInput.Content>
             <TextInput.Input

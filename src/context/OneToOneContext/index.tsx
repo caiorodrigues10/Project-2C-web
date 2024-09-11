@@ -1,16 +1,21 @@
-import { createContext, ReactNode, useContext, useState } from "react";
-
-export interface IDataOneToOne {
-  cpf: string;
-}
+import { ICreateOneToOne } from "@/services/faces/types";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export interface OneToOneContextData {
-  dataOneToOne: IDataOneToOne;
-  setDataOneToOne: (value: IDataOneToOne) => void;
+  resultOneToOne: ICreateOneToOne;
+  setResultOneToOne: (value: ICreateOneToOne) => void;
   photoFace: string;
   setPhotoFace: (value: string) => void;
   step: number;
   setStep: (value: number) => void;
+  clearAll: () => void;
 }
 
 const OneToOneContext = createContext<OneToOneContextData>(
@@ -22,19 +27,26 @@ interface OneToOneProviderProps {
 }
 
 const OneToOneProvider: React.FC<OneToOneProviderProps> = ({ children }) => {
-  const [dataOneToOne, setDataOneToOne] = useState({} as IDataOneToOne);
-
+  const [resultOneToOne, setResultOneToOne] = useState({} as ICreateOneToOne);
   const [photoFace, setPhotoFace] = useState("");
   const [step, setStep] = useState(1);
+
+  const clearAll = useCallback(() => {
+    setResultOneToOne({} as ICreateOneToOne);
+    setPhotoFace("");
+    setStep(1);
+  }, []);
+
   return (
     <OneToOneContext.Provider
       value={{
-        dataOneToOne,
-        setDataOneToOne,
+        resultOneToOne,
+        setResultOneToOne,
         photoFace,
         setPhotoFace,
         setStep,
         step,
+        clearAll,
       }}
     >
       {children}
