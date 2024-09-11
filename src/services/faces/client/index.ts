@@ -1,5 +1,12 @@
 import { PROVIDERS } from "@/providers";
-import { IOneToOne, IOneToOneResponse, IRegisterFace } from "../types";
+import {
+  ICreateOneToN,
+  ICreateOneToNResponse,
+  ICreateOneToOne,
+  IOneToOne,
+  IOneToOneResponse,
+  IRegisterFace,
+} from "../types";
 import api from "@/services/api";
 import { AppResponse } from "@/services/AppResponse";
 
@@ -32,6 +39,30 @@ export async function oneToOne(data: IOneToOne): Promise<IOneToOneResponse> {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .catch((err) => err.response);
+
+  return response;
+}
+
+export async function oneToN(
+  data: ICreateOneToN
+): Promise<ICreateOneToNResponse> {
+  const { getCookies } = PROVIDERS.cookies();
+  const { token } = getCookies();
+  const newDate = {
+    ...data,
+    collection: "import",
+  } as ICreateOneToN;
+
+  const response = await fetch(`${api}/faces/searchFaces`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(newDate),
   })
     .then((res) => res.json())
     .catch((err) => err.response);

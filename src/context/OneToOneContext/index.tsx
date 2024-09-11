@@ -4,13 +4,12 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 
 export interface OneToOneContextData {
-  resultOneToOne: ICreateOneToOne;
-  setResultOneToOne: (value: ICreateOneToOne) => void;
+  result: ICreateOneToOne;
+  setResult: (value: ICreateOneToOne) => void;
   photoFace: string;
   setPhotoFace: (value: string) => void;
   step: number;
@@ -27,12 +26,12 @@ interface OneToOneProviderProps {
 }
 
 const OneToOneProvider: React.FC<OneToOneProviderProps> = ({ children }) => {
-  const [resultOneToOne, setResultOneToOne] = useState({} as ICreateOneToOne);
+  const [result, setResult] = useState({} as ICreateOneToOne);
   const [photoFace, setPhotoFace] = useState("");
   const [step, setStep] = useState(1);
 
   const clearAll = useCallback(() => {
-    setResultOneToOne({} as ICreateOneToOne);
+    setResult({} as ICreateOneToOne);
     setPhotoFace("");
     setStep(1);
   }, []);
@@ -40,8 +39,8 @@ const OneToOneProvider: React.FC<OneToOneProviderProps> = ({ children }) => {
   return (
     <OneToOneContext.Provider
       value={{
-        resultOneToOne,
-        setResultOneToOne,
+        result,
+        setResult,
         photoFace,
         setPhotoFace,
         setStep,

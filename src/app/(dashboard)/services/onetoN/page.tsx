@@ -1,3 +1,3 @@
-export default function Comp() {
+export default function OneToNPage() {
   return <div />;
 }

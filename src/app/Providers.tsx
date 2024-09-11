@@ -1,5 +1,6 @@
 "use client";
 import { AppProvider } from "@/context/AppContext";
+import { OneToNProvider } from "@/context/OneToNContext";
 import { OneToOneProvider } from "@/context/OneToOneContext";
 import { RegisterFaceProvider } from "@/context/RegisterFaceContext";
 import { ToastProvider } from "@/context/ToastContext";
@@ -9,9 +10,11 @@ export function Providers({ children }: PropsWithChildren) {
   return (
     <ToastProvider>
       <AppProvider>
-        <OneToOneProvider>
-          <RegisterFaceProvider>{children}</RegisterFaceProvider>
-        </OneToOneProvider>
+        <OneToNProvider>
+          <OneToOneProvider>
+            <RegisterFaceProvider>{children}</RegisterFaceProvider>
+          </OneToOneProvider>
+        </OneToNProvider>
       </AppProvider>
     </ToastProvider>
   );

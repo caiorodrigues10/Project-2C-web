@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { useOneToNContext } from "@/context/OneToNContext";
 import { useOneToOneContext } from "@/context/OneToOneContext";
 import { IFaces } from "@/services/faces/types";
 import { cpfMask } from "@/utils/MaskProvider";
@@ -9,14 +10,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export function result({
+export function ResultOneToN({
   photo,
   faceData,
 }: {
   photo: string;
   faceData: IFaces;
 }) {
-  const { result } = useOneToOneContext();
+  const { result } = useOneToNContext();
   const [loading, setLoading] = useState(true);
 
   const handleImageLoad = () => {
@@ -38,7 +39,7 @@ export function result({
             onLoadingComplete={handleImageLoad}
           />
         </Card>
-        <div className="flex flex-col gap-4 justify-center items-center">
+        {/* <div className="flex flex-col gap-4 justify-center items-center">
           <h1 className="text-violet-500 text-4xl font-semibold">
             {result.similarity}%
           </h1>
@@ -69,7 +70,7 @@ export function result({
               <h4 className="text-lg font-medium">{cpfMask(faceData.cpf)}</h4>
             </div>
           </div>
-        </Card>
+        </Card> */}
       </div>
       <div className="flex w-full justify-end pt-4">
         <Link href={"/services"}>

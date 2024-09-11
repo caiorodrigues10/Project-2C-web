@@ -32,6 +32,26 @@ interface ICreateOneToOne {
 interface IOneToOneResponse extends AppResponse {
   data?: ICreateOneToOne;
 }
+interface ICreateOneToN {
+  image: string;
+  collection?: string;
+}
+
+interface IFacesOneToN {
+  id: number;
+  image: string;
+  similarity: number;
+  name: string;
+  doc: string;
+}
+
+interface ICreateOneToNResponse extends AppResponse {
+  id: number;
+  image: string;
+  similarity: number;
+  name: string;
+  doc: string;
+}
 
 export type {
   IRegisterFace,
@@ -40,4 +60,7 @@ export type {
   IOneToOne,
   IOneToOneResponse,
   ICreateOneToOne,
+  ICreateOneToN,
+  IFacesOneToN,
+  ICreateOneToNResponse,
 };

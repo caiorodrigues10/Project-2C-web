@@ -1,16 +1,16 @@
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
-import { useOneToOneContext } from "@/context/OneToOneContext";
+import { useOneToNContext } from "@/context/OneToNContext";
 import { useToast } from "@/context/ToastContext";
-import { oneToOne } from "@/services/faces/client";
+import { oneToN } from "@/services/faces/client";
 import { IFaces } from "@/services/faces/types";
 import clsx from "clsx";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 
-export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
-  const { setStep, photoFace, setResult } = useOneToOneContext();
+export function ConfirmDataOneToN({ faceData }: { faceData: IFaces }) {
+  const { setStep, photoFace, setResult } = useOneToNContext();
   const [isLoading, setIsLoading] = useState(false);
   const { addToast, removeToast } = useToast();
   const [loading, setLoading] = useState(true);
@@ -20,11 +20,10 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
   };
 
   const onSubmit = useCallback(
-    async (faceId: number, otherFace: string) => {
+    async (image: string) => {
       setIsLoading(true);
-      const response = await oneToOne({
-        faceId,
-        otherFace,
+      const response = await oneToN({
+        image,
       });
 
       if (response?.data && response.result === "success") {
@@ -88,7 +87,7 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
           <Button
             iconRight={<HiOutlineArrowRight size={16} />}
             isLoading={isLoading}
-            onClick={() => onSubmit(faceData.id, photoFace)}
+            onClick={() => onSubmit(photoFace)}
           >
             Confirmar
           </Button>
