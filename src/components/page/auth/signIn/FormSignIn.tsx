@@ -45,7 +45,9 @@ export function FormSignIn() {
       if (response?.result === "success") {
         addToast({
           type: "success",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
 
@@ -53,7 +55,9 @@ export function FormSignIn() {
       } else {
         addToast({
           type: "error",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
       }

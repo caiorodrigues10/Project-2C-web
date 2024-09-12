@@ -30,7 +30,9 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
       if (response?.data && response && response.result === "success") {
         addToast({
           type: "success",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
         setResult(response.data);
@@ -38,7 +40,9 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
       } else {
         addToast({
           type: "error",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
       }

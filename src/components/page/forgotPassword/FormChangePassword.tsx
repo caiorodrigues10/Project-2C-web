@@ -31,7 +31,9 @@ export function FormChangePassword({ token }: { token: string }) {
         addToast({
           type: "success",
           onClose: removeToast,
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
         });
         push("/login");
       } else {
@@ -40,6 +42,7 @@ export function FormChangePassword({ token }: { token: string }) {
           onClose: removeToast,
           message:
             response?.message ||
+            "Serviço indisponível tente novamente mais tarde" ||
             "Ocorreu um problema, tente novamente mais tarde",
         });
       }

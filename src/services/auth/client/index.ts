@@ -16,7 +16,7 @@ export async function login(data: ILogin): Promise<ILoginResponse> {
     .then((res) => res)
     .catch((err) => err.response);
 
-  const user = await response.json();
+  const user = await response?.json();
 
   return user;
 }

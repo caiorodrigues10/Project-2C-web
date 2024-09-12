@@ -28,14 +28,18 @@ export default function ConfirmDataRegisterFace() {
     if (response && response.result === "success") {
       addToast({
         type: "success",
-        message: response?.message,
+        message:
+          response?.message ||
+          "Serviço indisponível tente novamente mais tarde",
         onClose: removeToast,
       });
       push("/services");
     } else {
       addToast({
         type: "error",
-        message: response?.message,
+        message:
+          response?.message ||
+          "Serviço indisponível tente novamente mais tarde",
         onClose: removeToast,
       });
     }

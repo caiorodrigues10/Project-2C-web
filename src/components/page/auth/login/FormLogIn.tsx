@@ -26,17 +26,19 @@ export function FormLogIn() {
   const { addToast, removeToast } = useToast();
   const { push } = useRouter();
   const { setCookies } = nookiesProvider();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(
     async (data: FormLoginProps) => {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await login(data);
 
       if (response && response.result === "success") {
         addToast({
           type: "success",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
 
@@ -51,11 +53,13 @@ export function FormLogIn() {
       } else {
         addToast({
           type: "error",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
       }
-      setIsLoading(false)
+      setIsLoading(false);
     },
     [addToast, push, removeToast, setCookies]
   );
@@ -112,7 +116,9 @@ export function FormLogIn() {
               description={errors.password?.message}
             />
           </TextInput.Root>
-          <Button type="submit" isLoading={isLoading}>Entrar</Button>
+          <Button type="submit" isLoading={isLoading}>
+            Entrar
+          </Button>
         </form>
         <ClientOnly
           fallback={

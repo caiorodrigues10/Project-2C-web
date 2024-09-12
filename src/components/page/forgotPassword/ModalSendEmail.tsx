@@ -35,14 +35,18 @@ export function ModalSendEmail() {
       if (response && response.result === "success") {
         addToast({
           type: "success",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
         startCounter();
       } else {
         addToast({
           type: "error",
-          message: response?.message,
+          message:
+            response?.message ||
+            "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
       }
