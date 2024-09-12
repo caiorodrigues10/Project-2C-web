@@ -27,10 +27,10 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
         otherFace,
       });
 
-      if (response?.data && response.result === "success") {
+      if (response?.data && response && response.result === "success") {
         addToast({
           type: "success",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
         setResult(response.data);
@@ -38,7 +38,7 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
       } else {
         addToast({
           type: "error",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
       }

@@ -32,17 +32,17 @@ export function ModalSendEmail() {
 
       const response = await recoveryPassword(data);
 
-      if (response.result === "success") {
+      if (response && response.result === "success") {
         addToast({
           type: "success",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
         startCounter();
       } else {
         addToast({
           type: "error",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
       }

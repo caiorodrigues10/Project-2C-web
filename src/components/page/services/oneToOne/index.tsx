@@ -6,7 +6,7 @@ import { IFaces } from "@/services/faces/types";
 import { isMobile } from "@/utils/isMobile";
 import { useRouter } from "next/navigation";
 import { ConfirmDataOneToOne } from "./ConfirmDataOneToOne";
-import { result } from "./result";
+import { ResultOneToOne } from "./ResultOneToOne";
 
 export function OneToOne({ faceData }: { faceData: IFaces }) {
   const { setStep, step, photoFace, setPhotoFace } = useOneToOneContext();
@@ -35,7 +35,7 @@ export function OneToOne({ faceData }: { faceData: IFaces }) {
         />
       )}
       {step === 2 && <ConfirmDataOneToOne faceData={faceData} />}
-      {step === 3 && <result photo={photoFace} faceData={faceData} />}
+      {step === 3 && <ResultOneToOne photo={photoFace} faceData={faceData} />}
     </>
   );
 }

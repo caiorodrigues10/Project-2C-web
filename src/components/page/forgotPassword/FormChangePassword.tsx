@@ -31,7 +31,7 @@ export function FormChangePassword({ token }: { token: string }) {
         addToast({
           type: "success",
           onClose: removeToast,
-          message: response.message,
+          message: response?.message,
         });
         push("/login");
       } else {

@@ -33,10 +33,10 @@ export function FormLogIn() {
       setIsLoading(true)
       const response = await login(data);
 
-      if (response.result === "success") {
+      if (response && response.result === "success") {
         addToast({
           type: "success",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
 
@@ -51,7 +51,7 @@ export function FormLogIn() {
       } else {
         addToast({
           type: "error",
-          message: response.message,
+          message: response?.message,
           onClose: removeToast,
         });
       }

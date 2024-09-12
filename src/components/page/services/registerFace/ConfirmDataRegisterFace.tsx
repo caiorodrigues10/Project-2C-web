@@ -25,17 +25,17 @@ export default function ConfirmDataRegisterFace() {
 
     const response = await registerFace(newData);
 
-    if (response.result === "success") {
+    if (response && response.result === "success") {
       addToast({
         type: "success",
-        message: response.message,
+        message: response?.message,
         onClose: removeToast,
       });
       push("/services");
     } else {
       addToast({
         type: "error",
-        message: response.message,
+        message: response?.message,
         onClose: removeToast,
       });
     }
