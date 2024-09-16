@@ -6,6 +6,11 @@ interface IRegisterFace {
   image: string;
 }
 
+interface IRegisterFaceQDrant {
+  collection: string;
+  faceId: number;
+}
+
 interface IFaces {
   id: number;
   cpf: string;
@@ -46,11 +51,18 @@ interface IFacesOneToN {
 }
 
 interface ICreateOneToNResponse extends AppResponse {
-  id: number;
-  image: string;
-  similarity: number;
-  name: string;
-  doc: string;
+  data?: {
+    faces: IFacesOneToN[];
+    count: number;
+  };
+}
+
+interface IRegisterFaceResponse extends AppResponse {
+  data?: {
+    id: number;
+    template: string;
+    imageCrop: string;
+  };
 }
 
 export type {
@@ -63,4 +75,6 @@ export type {
   ICreateOneToN,
   IFacesOneToN,
   ICreateOneToNResponse,
+  IRegisterFaceQDrant,
+  IRegisterFaceResponse,
 };

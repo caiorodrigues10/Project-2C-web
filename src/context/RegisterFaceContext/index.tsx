@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
 
 export interface IDataRegisterFace {
   cpf: string;
@@ -12,6 +18,7 @@ export interface RegisterFaceContextData {
   setPhotoFace: (value: string) => void;
   step: number;
   setStep: (value: number) => void;
+  clearAll: () => void;
 }
 
 const RegisterFaceContext = createContext<RegisterFaceContextData>(
@@ -31,6 +38,12 @@ const RegisterFaceProvider: React.FC<RegisterFaceProviderProps> = ({
   const [photoFace, setPhotoFace] = useState("");
   const [step, setStep] = useState(1);
 
+  const clearAll = useCallback(() => {
+    setDataRegisterFace({} as IDataRegisterFace);
+    setPhotoFace("");
+    setStep(1);
+  }, []);
+
   return (
     <RegisterFaceContext.Provider
       value={{
@@ -40,6 +53,7 @@ const RegisterFaceProvider: React.FC<RegisterFaceProviderProps> = ({
         setPhotoFace,
         setStep,
         step,
+        clearAll,
       }}
     >
       {children}

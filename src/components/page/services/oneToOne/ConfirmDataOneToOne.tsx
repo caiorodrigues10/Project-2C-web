@@ -64,7 +64,12 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
             width={300}
             height={300}
             alt="Sua Foto"
-            className="h-[240px] w-[240px] object-cover rounded-xl border border-slate-400"
+            className={clsx(
+              "transition-opacity duration-500 h-[240px] w-[240px] object-cover rounded-xl border border-slate-400",
+              {
+                "animate-pulse bg-zinc-300": loading,
+              }
+            )}
           />
           <Image
             src={faceData.image}
@@ -83,7 +88,7 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
 
         <div className="flex w-full justify-between mt-2">
           <Button
-            onClick={() => setStep(2)}
+            onClick={() => setStep(1)}
             type="button"
             iconLeft={<HiOutlineArrowLeft />}
           >

@@ -2,14 +2,14 @@
 import { Capture, TypeCamProps } from "@/components/Capture";
 import { ProgressBar } from "@/components/ProgressbarTailwind";
 import { useOneToOneContext } from "@/context/OneToOneContext";
-import { IFaces } from "@/services/faces/types";
 import { isMobile } from "@/utils/isMobile";
 import { useRouter } from "next/navigation";
 import { ConfirmDataOneToN } from "./ConfirmDataOneToN";
 import { ResultOneToN } from "./ResultOneToN";
+import { useOneToNContext } from "@/context/OneToNContext";
 
-export function OneToOne({ faceData }: { faceData: IFaces }) {
-  const { setStep, step, photoFace, setPhotoFace } = useOneToOneContext();
+export function OneToN() {
+  const { setStep, step, photoFace, setPhotoFace } = useOneToNContext();
   const { push } = useRouter();
 
   return (
@@ -34,8 +34,8 @@ export function OneToOne({ faceData }: { faceData: IFaces }) {
           photo={photoFace}
         />
       )}
-      {step === 2 && <ConfirmDataOneToN faceData={faceData} />}
-      {step === 3 && <ResultOneToN photo={photoFace} faceData={faceData} />}
+      {step === 2 && <ConfirmDataOneToN />}
+      {step === 3 && <ResultOneToN photo={photoFace} />}
     </>
   );
 }

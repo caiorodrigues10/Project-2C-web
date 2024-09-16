@@ -1,22 +1,14 @@
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { Example } from "@/components/Carousel";
 import { useOneToNContext } from "@/context/OneToNContext";
-import { useOneToOneContext } from "@/context/OneToOneContext";
-import { IFaces } from "@/services/faces/types";
-import { cpfMask } from "@/utils/MaskProvider";
 import clsx from "clsx";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export function ResultOneToN({
-  photo,
-  faceData,
-}: {
-  photo: string;
-  faceData: IFaces;
-}) {
+export function ResultOneToN({ photo }: { photo: string }) {
   const { result } = useOneToNContext();
   const [loading, setLoading] = useState(true);
 
@@ -27,28 +19,13 @@ export function ResultOneToN({
   return (
     <Card className="!px-12">
       <h1 className="text-center pb-4 text-3xl font-bold">Resultado</h1>
-      <div className="flex justify-betweens gap-4 w-full">
-        <Card className="flex flex-col gap-4 justify-center">
-          <h1 className="text-center text-2xl font-semibold">Face Capturada</h1>
+      <div className="flex justify-betweens gap-4 w-full mt-4">
+        <div className="flex flex-col gap-4 justify-center">
+          <h1 className="text-center text-base font-semibold">
+            Face Capturada
+          </h1>
           <Image
             src={photo}
-            width={240}
-            height={240}
-            alt=""
-            className="transition-opacity duration-500 h-[240px] w-[240px] object-cover rounded-xl border border-slate-400"
-            onLoadingComplete={handleImageLoad}
-          />
-        </Card>
-        {/* <div className="flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-violet-500 text-4xl font-semibold">
-            {result.similarity}%
-          </h1>
-          <h3 className="text-2xl">de similaridade</h3>
-        </div>
-        <Card className="flex flex-col gap-4 justify-center">
-          <h1 className="text-center text-2xl font-semibold">Face Comparada</h1>
-          <Image
-            src={result.face}
             width={240}
             height={240}
             alt=""
@@ -60,17 +37,8 @@ export function ResultOneToN({
             )}
             onLoadingComplete={handleImageLoad}
           />
-          <div className="flex flex-col gap-2 w-full">
-            <div className="flex gap-2 items-end">
-              <p>Nome:</p>
-              <h4 className="text-lg font-medium">{faceData.name}</h4>
-            </div>
-            <div className="flex gap-2 items-end">
-              <p>CPF:</p>
-              <h4 className="text-lg font-medium">{cpfMask(faceData.cpf)}</h4>
-            </div>
-          </div>
-        </Card> */}
+        </div>
+        <Example images={result?.data?.faces.map((e) => e.image) || []} />
       </div>
       <div className="flex w-full justify-end pt-4">
         <Link href={"/services"}>

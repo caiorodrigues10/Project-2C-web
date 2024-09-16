@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { useRegisterFaceContext } from "@/context/RegisterFaceContext";
 import { useToast } from "@/context/ToastContext";
-import { registerFace } from "@/services/faces/client";
+import { registerFace, registerFaceQDrant } from "@/services/faces/client";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,11 @@ export default function ConfirmDataRegisterFace() {
     const response = await registerFace(newData);
 
     if (response && response.result === "success") {
+      await registerFaceQDrant({
+        collection: "import",
+        faceId: response.data?.id!,
+      });
+
       addToast({
         type: "success",
         message:

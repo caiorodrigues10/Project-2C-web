@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 
-export function ConfirmDataOneToN({ faceData }: { faceData: IFaces }) {
+export function ConfirmDataOneToN() {
   const { setStep, photoFace, setResult } = useOneToNContext();
   const [isLoading, setIsLoading] = useState(false);
   const { addToast, removeToast } = useToast();
@@ -23,10 +23,10 @@ export function ConfirmDataOneToN({ faceData }: { faceData: IFaces }) {
     async (image: string) => {
       setIsLoading(true);
       const response = await oneToN({
-        image,
+        image: image.replace(/^data:.*;base64,/, ""),
       });
 
-      if (response?.data && response && response.result === "success") {
+      if (response && response?.data && response.result === "success") {
         addToast({
           type: "success",
           message:
@@ -34,7 +34,7 @@ export function ConfirmDataOneToN({ faceData }: { faceData: IFaces }) {
             "Serviço indisponível tente novamente mais tarde",
           onClose: removeToast,
         });
-        setResult(response.data);
+        setResult(response);
         setStep(3);
       } else {
         addToast({
@@ -65,24 +65,11 @@ export function ConfirmDataOneToN({ faceData }: { faceData: IFaces }) {
             alt="Sua Foto"
             className="h-[240px] w-[240px] object-cover rounded-xl border border-slate-400"
           />
-          <Image
-            src={faceData.image}
-            width={300}
-            height={300}
-            alt=""
-            className={clsx(
-              "transition-opacity duration-500 h-[240px] w-[240px] object-cover rounded-xl border border-slate-400",
-              {
-                "animate-pulse bg-zinc-300": loading,
-              }
-            )}
-            onLoadingComplete={handleImageLoad}
-          />
         </div>
 
         <div className="flex w-full justify-between mt-2">
           <Button
-            onClick={() => setStep(2)}
+            onClick={() => setStep(1)}
             type="button"
             iconLeft={<HiOutlineArrowLeft />}
           >

@@ -7,6 +7,7 @@ import { IListFacesResponse } from "@/services/faces/types";
 import { cpfMask, dateTime } from "@/utils/MaskProvider";
 import clsx from "clsx";
 import { ModalFaceById } from "./ModalFaceById";
+import Link from "next/link";
 
 export function FacesTable({
   data,
@@ -20,7 +21,9 @@ export function FacesTable({
       <Table.Root>
         <Table.Caption className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Faces cadastradas</h1>
-          <Button variant="black-white">Cadastrar nova face</Button>
+          <Link href={"/services/registerFace"}>
+            <Button variant="black-white">Cadastrar nova face</Button>
+          </Link>
         </Table.Caption>
         <Table.Table>
           <Table.Header.Content>

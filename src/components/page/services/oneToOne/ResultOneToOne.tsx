@@ -26,9 +26,9 @@ export function ResultOneToOne({
   return (
     <Card className="!px-12">
       <h1 className="text-center pb-4 text-3xl font-bold">Resultado</h1>
-      <div className="flex justify-betweens gap-4 w-full">
-        <Card className="flex flex-col gap-4 justify-center">
-          <h1 className="text-center text-2xl font-semibold">Face Capturada</h1>
+      <div className="flex justify-between items-start gap-8 w-full">
+        <div className="flex flex-col gap-4 justify-center">
+          <h1 className="text-center font-semibold">Face Capturada</h1>
           <Image
             src={photo}
             width={240}
@@ -37,28 +37,35 @@ export function ResultOneToOne({
             className="transition-opacity duration-500 h-[240px] w-[240px] object-cover rounded-xl border border-slate-400"
             onLoadingComplete={handleImageLoad}
           />
-        </Card>
-        <div className="flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-violet-500 text-4xl font-semibold">
+        </div>
+        <div className="flex flex-col justify-center items-center h-full mt-[120px]">
+          <h1
+            className={clsx("text-4xl font-semibold", {
+              "text-green-500": result.similarity >= 75,
+              "text-red-500": result.similarity < 75,
+            })}
+          >
             {result.similarity}%
           </h1>
-          <h3 className="text-2xl">de similaridade</h3>
+          <h3 className="text-xl">de similaridade</h3>
         </div>
-        <Card className="flex flex-col gap-4 justify-center">
-          <h1 className="text-center text-2xl font-semibold">Face Comparada</h1>
-          <Image
-            src={result.face}
-            width={240}
-            height={240}
-            alt=""
-            className={clsx(
-              "transition-opacity duration-500 h-[240px] w-[240px] object-cover rounded-xl border border-slate-400",
-              {
-                "animate-pulse bg-zinc-300": loading,
-              }
-            )}
-            onLoadingComplete={handleImageLoad}
-          />
+        <div className="flex flex-col gap-4 items-start">
+          <div className="flex flex-col gap-4 items-center">
+            <h1 className="text-center font-semibold">Face Comparada</h1>
+            <Image
+              src={result.face}
+              width={240}
+              height={240}
+              alt=""
+              className={clsx(
+                "transition-opacity duration-500 h-[240px] w-[240px] object-cover rounded-xl border border-slate-400",
+                {
+                  "animate-pulse bg-zinc-300": loading,
+                }
+              )}
+              onLoadingComplete={handleImageLoad}
+            />
+          </div>
           <div className="flex flex-col gap-2 w-full">
             <div className="flex gap-2 items-end">
               <p>Nome:</p>
@@ -69,7 +76,7 @@ export function ResultOneToOne({
               <h4 className="text-lg font-medium">{cpfMask(faceData.cpf)}</h4>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
       <div className="flex w-full justify-end pt-4">
         <Link href={"/services"}>
