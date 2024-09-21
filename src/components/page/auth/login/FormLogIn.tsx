@@ -34,6 +34,8 @@ export function FormLogIn() {
       const response = await login(data);
 
       if (response && response.result === "success") {
+        console.log(response);
+        
         addToast({
           type: "success",
           message:

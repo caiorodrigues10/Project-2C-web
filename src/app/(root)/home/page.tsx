@@ -18,10 +18,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default function HomePage() {
-  const token = cookies().get("2c.token");
+  const token = cookies().get("2c.token")?.value;
 
   if (token) {
-    redirect("/services");
+    return redirect("/services");
   }
 
   return (

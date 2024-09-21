@@ -65,6 +65,33 @@ interface IRegisterFaceResponse extends AppResponse {
   };
 }
 
+interface IFacesTransaction {
+  id: number;
+  createdAt: Date;
+  action: string;
+  image: string;
+  facesFound: number;
+}
+
+interface IListFacesTransactionsResponse {
+  count: number;
+  list: IFacesTransaction[];
+}
+
+interface IFacesFound {
+  id: number;
+  image: string;
+  createdAt: Date;
+  similarity: number;
+}
+
+interface IFacesTransactionById extends AppResponse {
+  data?: {
+    transactionImage: string;
+    similarities: IFacesFound;
+  };
+}
+
 export type {
   IRegisterFace,
   IListFacesResponse,
@@ -77,4 +104,8 @@ export type {
   ICreateOneToNResponse,
   IRegisterFaceQDrant,
   IRegisterFaceResponse,
+  IFacesTransaction,
+  IListFacesTransactionsResponse,
+  IFacesFound,
+  IFacesTransactionById,
 };

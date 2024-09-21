@@ -3,6 +3,7 @@ import {
   ICreateOneToN,
   ICreateOneToNResponse,
   ICreateOneToOne,
+  IFacesTransactionById,
   IOneToOne,
   IOneToOneResponse,
   IRegisterFace,
@@ -87,6 +88,25 @@ export async function oneToN(
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(newDate),
+  })
+    .then((res) => res.json())
+    .catch((err) => err.response);
+
+  return response;
+}
+
+export async function faceTransactionById(
+  id: number
+): Promise<IFacesTransactionById> {
+  const { getCookies } = PROVIDERS.cookies();
+  const { token } = getCookies();
+
+  const response = await fetch(`${api}/faces/transaction/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((res) => res.json())
     .catch((err) => err.response);
