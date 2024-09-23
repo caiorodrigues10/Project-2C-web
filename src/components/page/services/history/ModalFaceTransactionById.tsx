@@ -1,15 +1,10 @@
 "use client";
-import { Button } from "@/components/Button";
 import { Modal } from "@/components/Modal";
 import { Table } from "@/components/Table";
 import { useOneToOneContext } from "@/context/OneToOneContext";
 import { useDisclosure } from "@/hooks/disclosure";
 import { faceTransactionById } from "@/services/faces/client";
 import { IFacesTransactionById } from "@/services/faces/types";
-import { cpfMask, dateTime } from "@/utils/MaskProvider";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 
 export function ModalFaceTransactionById({
@@ -23,20 +18,21 @@ export function ModalFaceTransactionById({
   const { clearAll } = useOneToOneContext();
 
   const [loading, setLoading] = useState(true);
-  const [dataFaceTransactionById, setDatFaceTransactionById]= useState({} as IFacesTransactionById)
+  const [dataFaceTransactionById, setDatFaceTransactionById] = useState(
+    {} as IFacesTransactionById
+  );
 
   const handleImageLoad = () => {
     setLoading(false);
   };
 
   const fetchFaceTransactionById = useCallback(async () => {
-    const response = await faceTransactionById(id)
+    const response = await faceTransactionById(id);
+  }, [id]);
 
-  }, [id])
-
-  useEffect(()=> {
-    fetchFaceTransactionById()
-  }, [id])
+  useEffect(() => {
+    fetchFaceTransactionById();
+  }, [id, fetchFaceTransactionById]);
 
   return (
     <>

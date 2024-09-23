@@ -1,12 +1,11 @@
 "use client";
 import { Capture, TypeCamProps } from "@/components/Capture";
 import { ProgressBar } from "@/components/ProgressbarTailwind";
-import { useOneToOneContext } from "@/context/OneToOneContext";
+import { useOneToNContext } from "@/context/OneToNContext";
 import { isMobile } from "@/utils/isMobile";
 import { useRouter } from "next/navigation";
 import { ConfirmDataOneToN } from "./ConfirmDataOneToN";
 import { ResultOneToN } from "./ResultOneToN";
-import { useOneToNContext } from "@/context/OneToNContext";
 
 export function OneToN() {
   const { setStep, step, photoFace, setPhotoFace } = useOneToNContext();
