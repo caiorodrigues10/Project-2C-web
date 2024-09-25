@@ -2,7 +2,6 @@ import { PROVIDERS } from "@/providers";
 import {
   ICreateOneToN,
   ICreateOneToNResponse,
-  ICreateOneToOne,
   IFacesTransactionById,
   IOneToOne,
   IOneToOneResponse,
@@ -106,12 +105,11 @@ export async function faceTransactionById(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      "ngrok-skip-browser-warning": "aa",
     },
   })
     .then((res) => res.json())
     .catch((err) => err.response);
-
-  console.log({ response, reste: "teste" });
 
   return response;
 }

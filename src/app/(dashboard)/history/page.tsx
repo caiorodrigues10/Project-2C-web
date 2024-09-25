@@ -1,8 +1,5 @@
 import { HistoryTable } from "@/components/page/services/history/HistoryTable";
-import {
-  IListFacesResponse,
-  IListFacesTransactionsResponse,
-} from "@/services/faces/types";
+import { IListFacesTransactionsResponse } from "@/services/faces/types";
 import { useServer } from "@/utils/useServer";
 
 export default async function HistoryPage({

@@ -83,12 +83,14 @@ interface IFacesFound {
   image: string;
   createdAt: Date;
   similarity: number;
+  cpf: string;
+  name: string;
 }
 
 interface IFacesTransactionById extends AppResponse {
   data?: {
     transactionImage: string;
-    similarities: IFacesFound;
+    similarities: IFacesFound[];
   };
 }
 
