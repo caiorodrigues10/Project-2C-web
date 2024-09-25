@@ -3,7 +3,10 @@ import { Card } from "@/components/Card";
 import { ClientOnly } from "@/components/ClientOnly";
 import { Table } from "@/components/Table";
 import { LoadingTable } from "@/components/Table/LoadingTable";
-import { IListFacesResponse, IListFacesTransactionsResponse } from "@/services/faces/types";
+import {
+  IListFacesResponse,
+  IListFacesTransactionsResponse,
+} from "@/services/faces/types";
 import { cpfMask, dateTime } from "@/utils/MaskProvider";
 import clsx from "clsx";
 import Link from "next/link";
@@ -20,23 +23,26 @@ export function HistoryTable({
     <Card className="w-full">
       <Table.Root>
         <Table.Caption className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Faces cadastradas</h1>
+          <h1 className="text-2xl font-semibold">Histórico de transações</h1>
           <Link href={"/services/registerFace"}>
             <Button variant="black-white">Cadastrar nova face</Button>
           </Link>
         </Table.Caption>
         <Table.Table>
           <Table.Header.Content>
-            {["Nome", "CPF", "Data de criação"].map((head, index) => (
-              <Table.Header.Item.Default
-                key={index}
-                className={clsx({
-                  "text-end": ["Data de criação"].includes(head),
-                })}
-              >
-                {head}
-              </Table.Header.Item.Default>
-            ))}
+            {["Faces encontradas", "Processo", "Data de criação"].map(
+              (head, index) => (
+                <Table.Header.Item.Default
+                  key={index}
+                  className={clsx({
+                    "text-end": ["Data de criação"].includes(head),
+                    "text-center": ["Processo"].includes(head),
+                  })}
+                >
+                  {head}
+                </Table.Header.Item.Default>
+              )
+            )}
           </Table.Header.Content>
           <ClientOnly
             fallback={<LoadingTable lines="012345678" columns="123" />}
@@ -44,14 +50,14 @@ export function HistoryTable({
             <Table.Body.Content>
               {data && data.count > 0 ? (
                 data?.list?.map((row) => {
-                  const { action,createdAt,facesFound,id,image } = row;
+                  const { action, createdAt, facesFound, id } = row;
 
                   const { Default } = Table.Body.Data;
 
                   return (
                     <ModalFaceTransactionById id={id} key={id}>
                       <Default>{facesFound}</Default>
-                      <Default>{(action)}</Default>
+                      <Default className="text-center">{action}</Default>
                       <Default className="text-end">
                         {dateTime(String(createdAt))}
                       </Default>
@@ -59,7 +65,7 @@ export function HistoryTable({
                   );
                 })
               ) : (
-                <Table.Body.EmptyData description="Nenhuma face encontrada" />
+                <Table.Body.EmptyData description="Nenhuma transação encontrada" />
               )}
             </Table.Body.Content>
           </ClientOnly>

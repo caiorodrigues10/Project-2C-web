@@ -111,5 +111,7 @@ export async function faceTransactionById(
     .then((res) => res.json())
     .catch((err) => err.response);
 
+  console.log({ response, reste: "teste" });
+
   return response;
 }

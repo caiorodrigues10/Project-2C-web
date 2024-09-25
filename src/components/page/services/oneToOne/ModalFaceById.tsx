@@ -1,17 +1,15 @@
 "use client";
 import { Button } from "@/components/Button";
-import { ClientOnly } from "@/components/ClientOnly";
 import { Modal } from "@/components/Modal";
 import { Table } from "@/components/Table";
 import { useOneToOneContext } from "@/context/OneToOneContext";
-import { useToast } from "@/context/ToastContext";
 import { useDisclosure } from "@/hooks/disclosure";
 import { IFaces } from "@/services/faces/types";
 import { cpfMask, dateTime } from "@/utils/MaskProvider";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode, Suspense, useState } from "react";
+import { ReactNode, useState } from "react";
 
 export function ModalFaceById({
   data,

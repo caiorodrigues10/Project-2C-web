@@ -2,6 +2,7 @@
 import { Modal } from "@/components/Modal";
 import { Table } from "@/components/Table";
 import { useOneToOneContext } from "@/context/OneToOneContext";
+import { useToast } from "@/context/ToastContext";
 import { useDisclosure } from "@/hooks/disclosure";
 import { faceTransactionById } from "@/services/faces/client";
 import { IFacesTransactionById } from "@/services/faces/types";
@@ -16,7 +17,7 @@ export function ModalFaceTransactionById({
 }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { clearAll } = useOneToOneContext();
-
+  const { addToast, removeToast } = useToast();
   const [loading, setLoading] = useState(true);
   const [dataFaceTransactionById, setDatFaceTransactionById] = useState(
     {} as IFacesTransactionById
@@ -28,15 +29,36 @@ export function ModalFaceTransactionById({
 
   const fetchFaceTransactionById = useCallback(async () => {
     const response = await faceTransactionById(id);
-  }, [id]);
 
-  useEffect(() => {
-    fetchFaceTransactionById();
-  }, [id, fetchFaceTransactionById]);
+    if (response?.result === "success") {
+      addToast({
+        type: "success",
+        message:
+          response?.message ||
+          "Serviço indisponível tente novamente mais tarde",
+        onClose: removeToast,
+      });
+    } else {
+      addToast({
+        type: "error",
+        message:
+          response?.message ||
+          "Serviço indisponível tente novamente mais tarde",
+        onClose: removeToast,
+      });
+    }
+  }, [id, addToast, removeToast]);
 
   return (
     <>
-      <Table.Body.Row onClick={onOpen}>{children}</Table.Body.Row>
+      <Table.Body.Row
+        onClick={() => {
+          onOpen();
+          fetchFaceTransactionById();
+        }}
+      >
+        {children}
+      </Table.Body.Row>
 
       <Modal.Root
         title={"Informações de "}
