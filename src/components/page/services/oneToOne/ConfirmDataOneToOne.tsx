@@ -24,7 +24,7 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
       setIsLoading(true);
       const response = await oneToOne({
         faceId,
-        otherFace,
+        otherFace: otherFace.replace(/^data:.*;base64,/, ""),
       });
 
       if (response?.data && response && response.result === "success") {
@@ -54,7 +54,7 @@ export function ConfirmDataOneToOne({ faceData }: { faceData: IFaces }) {
   return (
     <Card className="w-[700px] flex items-center flex-col">
       <h1 className="text-2xl text-center font-semibold pb-4">
-        Confirmar imagem
+        Confirmar dados
       </h1>
 
       <div className="w-full flex flex-col items-center gap-4">

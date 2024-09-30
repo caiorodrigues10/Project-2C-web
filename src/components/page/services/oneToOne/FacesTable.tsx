@@ -8,6 +8,7 @@ import { cpfMask, dateTime } from "@/utils/MaskProvider";
 import clsx from "clsx";
 import { ModalFaceById } from "./ModalFaceById";
 import Link from "next/link";
+import { ArrowLeftCircle } from "lucide-react";
 
 export function FacesTable({
   data,
@@ -20,7 +21,12 @@ export function FacesTable({
     <Card className="w-full">
       <Table.Root>
         <Table.Caption className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Faces cadastradas</h1>
+          <div className="flex gap-4 items-center">
+            <Link href={"/services"} className="cursor-pointer">
+              <ArrowLeftCircle />
+            </Link>
+            <h1 className="text-2xl font-semibold">Faces cadastradas</h1>
+          </div>
           <Link href={"/services/registerFace"}>
             <Button variant="black-white">Cadastrar nova face</Button>
           </Link>

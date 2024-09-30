@@ -1,9 +1,10 @@
 import { Card } from "@/components/Card";
 import clsx from "clsx";
-import { AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { ModalOverlay } from "./ModalOverlay";
 import { ModalRootProps } from "./types";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 
 export function ModalRoot({
   isOpen,
@@ -14,7 +15,19 @@ export function ModalRoot({
   children,
   size = "md",
 }: ModalRootProps) {
-  return (
+  const [mounted, setMounted] = useState(false);
+  const [modalContainer, setModalContainer] = useState<HTMLElement | null>(
+    null
+  );
+
+  useEffect(() => {
+    setMounted(true);
+    setModalContainer(document.getElementById("modal-root"));
+  }, []);
+
+  if (!mounted || !modalContainer) return null;
+
+  return createPortal(
     <ModalOverlay isLoading={isLoading} isOpen={isOpen} onClose={onClose}>
       <Card
         className={clsx(className, {
@@ -36,6 +49,7 @@ export function ModalRoot({
         </header>
         {children}
       </Card>
-    </ModalOverlay>
+    </ModalOverlay>,
+    modalContainer
   );
 }

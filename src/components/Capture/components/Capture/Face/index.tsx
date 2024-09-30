@@ -61,8 +61,6 @@ const CaptureFaceManual: React.FC<ICaptureFaceManual> = ({
     );
   }, []);
 
-  console.log(isLoadingComponent);
-
   return (
     <div className="flex flex-col items-center justify-center">
       {videoProps ? (

@@ -4,6 +4,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -35,6 +36,10 @@ const OneToOneProvider: React.FC<OneToOneProviderProps> = ({ children }) => {
     setPhotoFace("");
     setStep(1);
   }, []);
+
+  useEffect(() => {
+    clearAll();
+  }, [clearAll]);
 
   return (
     <OneToOneContext.Provider

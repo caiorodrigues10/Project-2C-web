@@ -59,7 +59,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 
           {currentStep > key + 1 && <BsCheck className="text-white" />}
           {!isMobile && (
-            <p className="absolute flex top-[120%] w-[200px] justify-center">
+            <p className="absolute flex top-[120%] w-[200px] justify-center text-center">
               {point.description}
             </p>
           )}

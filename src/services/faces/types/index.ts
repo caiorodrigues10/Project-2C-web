@@ -40,6 +40,7 @@ interface IOneToOneResponse extends AppResponse {
 interface ICreateOneToN {
   image: string;
   collection?: string;
+  threshold: number;
 }
 
 interface IFacesOneToN {
@@ -91,6 +92,7 @@ interface IFacesTransactionById extends AppResponse {
   data?: {
     transactionImage: string;
     similarities: IFacesFound[];
+    threshold: number;
   };
 }
 

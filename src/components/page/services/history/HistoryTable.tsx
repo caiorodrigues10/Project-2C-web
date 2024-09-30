@@ -24,9 +24,6 @@ export function HistoryTable({
       <Table.Root>
         <Table.Caption className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Histórico de transações</h1>
-          <Link href={"/services/registerFace"}>
-            <Button variant="black-white">Cadastrar nova face</Button>
-          </Link>
         </Table.Caption>
         <Table.Table>
           <Table.Header.Content>
@@ -55,7 +52,7 @@ export function HistoryTable({
                   const { Default } = Table.Body.Data;
 
                   return (
-                    <ModalFaceTransactionById id={id} key={id}>
+                    <ModalFaceTransactionById id={id} key={id} process={action}>
                       <Default>{facesFound}</Default>
                       <Default className="text-center">{action}</Default>
                       <Default className="text-end">

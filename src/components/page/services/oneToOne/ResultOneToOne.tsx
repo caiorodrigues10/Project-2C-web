@@ -39,14 +39,7 @@ export function ResultOneToOne({
           />
         </div>
         <div className="flex flex-col justify-center items-center h-full mt-[120px]">
-          <h1
-            className={clsx("text-4xl font-semibold", {
-              "text-green-500": result.similarity >= 75,
-              "text-red-500": result.similarity < 75,
-            })}
-          >
-            {result.similarity}%
-          </h1>
+          <h1 className="text-4xl font-semibold">{result.similarity}%</h1>
           <h3 className="text-xl">de similaridade</h3>
         </div>
         <div className="flex flex-col gap-4 items-start">

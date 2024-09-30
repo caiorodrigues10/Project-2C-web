@@ -4,6 +4,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -15,6 +16,8 @@ export interface OneToNContextData {
   step: number;
   setStep: (value: number) => void;
   clearAll: () => void;
+  threshold?: number;
+  setThreshold: (value?: number) => void;
 }
 
 const OneToNContext = createContext<OneToNContextData>({} as OneToNContextData);
@@ -25,14 +28,20 @@ interface OneToNProviderProps {
 
 const OneToNProvider: React.FC<OneToNProviderProps> = ({ children }) => {
   const [result, setResult] = useState({} as ICreateOneToNResponse);
+  const [threshold, setThreshold] = useState<number>();
   const [photoFace, setPhotoFace] = useState("");
   const [step, setStep] = useState(1);
 
   const clearAll = useCallback(() => {
     setResult({} as ICreateOneToNResponse);
     setPhotoFace("");
+    setThreshold(undefined);
     setStep(1);
   }, []);
+
+  useEffect(() => {
+    clearAll();
+  }, [clearAll]);
 
   return (
     <OneToNContext.Provider
@@ -44,6 +53,8 @@ const OneToNProvider: React.FC<OneToNProviderProps> = ({ children }) => {
         setStep,
         step,
         clearAll,
+        setThreshold,
+        threshold,
       }}
     >
       {children}

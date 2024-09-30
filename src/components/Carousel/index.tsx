@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const variants = {
   enter: (direction: number) => {
@@ -39,10 +40,17 @@ export const Example = ({ images }: { images: string[] }) => {
   };
 
   return (
-    <>
+    <div className="items-center flex">
+      <div
+        className="next -mr-4 bg-zinc-100 p-1 rounded-full z-10 border border-zinc-600 hover:scale-105 duration-200 hover:bg-zinc-200 hover:shadow-md"
+        onClick={() => paginate(1)}
+      >
+        <ArrowLeft />
+      </div>
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
+          className="h-[240px] w-[240px] object-cover rounded-xl border border-slate-400"
           src={images[imageIndex]}
           custom={direction}
           variants={variants}
@@ -67,12 +75,13 @@ export const Example = ({ images }: { images: string[] }) => {
           }}
         />
       </AnimatePresence>
-      <div className="next" onClick={() => paginate(1)}>
-        {"‣"}
-      </div>
-      <div className="prev" onClick={() => paginate(-1)}>
-        {"‣"}
-      </div>
-    </>
+
+      <button
+        className="prev -ml-4 bg-zinc-100 p-1 rounded-full z-10 border border-zinc-600 hover:scale-105 duration-200 hover:bg-zinc-200 hover:shadow-md"
+        onClick={() => paginate(-1)}
+      >
+        <ArrowRight />
+      </button>
+    </div>
   );
 };

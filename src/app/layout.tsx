@@ -21,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="scrollbar-hide">
       <body className={poppins.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <div id="modal-root" />
+        </Providers>
       </body>
     </html>
   );

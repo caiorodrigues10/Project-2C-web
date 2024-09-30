@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -43,6 +44,10 @@ const RegisterFaceProvider: React.FC<RegisterFaceProviderProps> = ({
     setPhotoFace("");
     setStep(1);
   }, []);
+
+  useEffect(() => {
+    clearAll();
+  }, [clearAll]);
 
   return (
     <RegisterFaceContext.Provider

@@ -19,6 +19,7 @@ interface CardSlideProps {
   imageSrc: string;
   name: string;
   cpf: string;
+  totalFaces?: number;
 }
 
 function CardSlide({
@@ -29,6 +30,7 @@ function CardSlide({
   imageSrc,
   cpf,
   name,
+  totalFaces = 0,
 }: CardSlideProps) {
   const [exitX, setExitX] = useState(0);
 
@@ -54,13 +56,13 @@ function CardSlide({
   };
 
   function handleDragEnd(_: any, info: PanInfo) {
-    if (info.offset.x < -100 && setIndex && index !== undefined) {
+    if (info.offset.x < -100 && setIndex && index !== undefined && totalFaces) {
       setExitX(-250);
-      setIndex((index + 1) % 4);
+      setIndex((index + 1) % totalFaces);
     }
-    if (info.offset.x > 100 && setIndex && index !== undefined) {
+    if (info.offset.x > 100 && setIndex && index !== undefined && totalFaces) {
       setExitX(250);
-      setIndex((index + 1) % 4);
+      setIndex((index + 1) % totalFaces);
     }
   }
 
@@ -102,6 +104,9 @@ function CardSlide({
         }}
         className="relative"
       >
+        <div className="text-sm absolute z-10 flex items-end top-0 right-0 bg-blue-600 text-white font-semibold px-3 py-1 rounded-tr-xl rounded-bl-xl border-2 border-blue-800">
+          {index !== undefined ? (index % totalFaces) + 1 : 1}/{totalFaces}
+        </div>
         <div className="w-full h-full absolute z-10 flex items-end">
           <div className="bg-black/50 p-4 w-full text-white rounded-b-xl">
             <p className="max-w-full truncate">Nome: {name}</p>
@@ -120,27 +125,32 @@ function CardSlide({
   );
 }
 
-export function Example({ faces }: { faces: IFacesFound[] }) {
+export function ContentCardSlide({ faces }: { faces: IFacesFound[] }) {
   const [index, setIndex] = useState(0);
 
   return (
     <div className="flex gap-4 items-center">
-      <h3 className="text-2xl">{faces[index % faces.length].similarity}%</h3>
+      <h3 className="text-2xl font-semibold">
+        {Math.ceil(faces[index % faces.length]?.similarity)}%
+      </h3>
       <motion.div style={{ width: 240, height: 240, position: "relative" }}>
         <AnimatePresence initial={false}>
-          <CardSlide
-            key={index + 1}
-            frontCard={false}
-            imageSrc={faces[(index + 1) % faces.length].image}
-            cpf={faces[(index + 1) % faces.length].cpf}
-            name={faces[(index + 1) % faces.length].name}
-          />
+          {faces.length > 1 && (
+            <CardSlide
+              key={index + 1}
+              frontCard={false}
+              imageSrc={faces[(index + 1) % faces.length].image}
+              cpf={faces[(index + 1) % faces.length].cpf}
+              name={faces[(index + 1) % faces.length].name}
+            />
+          )}
           <CardSlide
             key={index}
             frontCard={true}
             index={index}
+            totalFaces={faces.length}
             setIndex={setIndex}
-            drag="x"
+            drag={faces.length > 1 && "x"}
             imageSrc={faces[index % faces.length].image}
             cpf={faces[index % faces.length].cpf}
             name={faces[index % faces.length].name}
