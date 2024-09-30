@@ -6,13 +6,13 @@ import { useServer } from "@/utils/useServer";
 import { redirect } from "next/navigation";
 
 export default async function ForgotPasswordPage({
-  params,
+  searchParams,
 }: {
-  params: { token: string };
+  searchParams: { token: string };
 }) {
   const verifyToken = await useServer<AppResponse>({
     pathname: `users/forgotPassword/validate`,
-    query: [{ name: "token", value: params.token }],
+    query: [{ name: "token", value: searchParams.token }],
   });
 
   if (verifyToken?.result === "error") {
@@ -34,7 +34,7 @@ export default async function ForgotPasswordPage({
             </div>
           }
         >
-          <FormChangePassword token={params.token} />
+          <FormChangePassword token={searchParams.token} />
         </ClientOnly>
       </Card>
     </div>
