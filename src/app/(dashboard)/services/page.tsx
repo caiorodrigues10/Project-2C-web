@@ -70,7 +70,7 @@ export default function ServicesPage() {
             <h5 className="text-xl text-center">
               Comparar uma face com várias e retorna todas as similares
             </h5>
-            <Link href={"/services/oneToN"} className="w-full">
+            <Link href={"/services/onetoN"} className="w-full">
               <Button variant="black-white" className="w-full">
                 Utilizar 1:N
               </Button>
